@@ -3,3 +3,5 @@ Projet Isis capitalist pour la matière architecture orienté services
 ```
 npm start
 ```
+# faire tourner le front en local 
+ng serve --open
