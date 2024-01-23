@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { World, Palier, Product } from './world';
 import { WebserviceService } from './webservice.service';
 
+export const GET_SERV = "http://localhost:4000/";
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -12,9 +14,10 @@ import { WebserviceService } from './webservice.service';
 })
 export class AppComponent {
   title = 'isisCapitalist';
+  server = GET_SERV;
   world: World = new World();
   constructor(private service: WebserviceService) {
-    service.getWorld().then(
+    this.service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
       }
