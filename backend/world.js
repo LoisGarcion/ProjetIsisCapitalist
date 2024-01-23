@@ -95,7 +95,7 @@ module.exports = {
         {
             "name": "Coronasbirus",
             "logo": "icones/premierunlock.jpg",
-            "seuil": 50000,
+            "seuil": 10,
             "idcible": 0,
             "ratio": 3,
             "typeratio": "gain",
@@ -106,9 +106,18 @@ module.exports = {
     "upgrades": [
         {
             "name": "Massacre des sbires mage",
-            "logo": "icones/premierupgrade.jpg",
-            "seuil": 1e3, //TODO demander pourquoi y'a un e, c'est surement les exposants mais ca a l'air chiant
+            "logo": "icones/sbiremage.jpg",
+            "seuil": 1e3,
             "idcible": 1,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Tueur de cannons",
+            "logo": "icones/sbirecannon.jpg",
+            "seuil": 1e3,
+            "idcible": 2,
             "ratio": 3,
             "typeratio": "gain",
             "unlocked": false
@@ -117,8 +126,8 @@ module.exports = {
     ],
     "angelupgrades": [
         {
-            "name": "Angel Sacrifice",
-            "logo": "icones/angel.png",
+            "name": "Porofessor",
+            "logo": "icones/porofessor.png",
             "seuil": 10,
             "idcible": 0,
             "ratio": 3,
