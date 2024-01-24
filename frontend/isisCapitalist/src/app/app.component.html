@@ -2,6 +2,7 @@
   <header>
     <span><img [attr.src]="server+world.logo" /> </span>
     <p>{{world.name}}</p>
+    <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"/>  
   </header>
   <div class="container">
     <div class="leftmenu">
@@ -12,3 +13,4 @@
     </div>
   </div>
 </main>
+
