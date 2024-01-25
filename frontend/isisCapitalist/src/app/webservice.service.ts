@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { createClient } from '@urql/core';
+import { createClient, fetchExchange } from '@urql/core';
 import { GET_WORLD } from '../Graphrequest'; // Add the missing import statement
 import { GET_SERV } from './app.component';
 
@@ -11,12 +11,13 @@ export class WebserviceService {
 
   createClient() {
     return createClient({
-      url: GET_SERV + "/graphql", fetchOptions: () => {
+      url: GET_SERV + "graphql",
+      exchanges : [fetchExchange],
+      fetchOptions: () => {
         return {
           headers: { 'x-user': this.user },
         };
       },
-      exchanges: []
     });
   }
 
