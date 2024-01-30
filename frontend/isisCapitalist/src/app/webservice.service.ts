@@ -7,7 +7,7 @@ import { GET_SERV } from './app.component';
   providedIn: 'root'
 })
 export class WebserviceService {
-  server = 'http://localhost:4000/';
+//le serveur est dans appcomponent.ts pour pouvoir le réutiliser partout
   user = '';
 
   createClient() {
