@@ -7,6 +7,7 @@ import { GET_SERV } from './app.component';
   providedIn: 'root'
 })
 export class WebserviceService {
+  server = 'http://localhost:4000/';
   user = '';
 
   createClient() {
