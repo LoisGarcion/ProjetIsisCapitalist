@@ -11,34 +11,32 @@ function saveWorld(context)  {
 
 function updateMoney(context) {
     let total = 0
+    let w = context.world
     context.world.products.forEach(p => {
-        let time = Date.now() - p.lastupdate.toInt()
+        let time = Date.now() - Number(w.lastupdate)
         if(!p.managerUnlocked){
             if(p.timeleft < 0){
                 total += p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)
             }
             else if(p.timeleft > 0){
                 p.timeleft -= time
-                p.lastupdate = Date.now().toString()
             }
         }
         else{
             if(p.timeleft < 0){
                 total += (1 + (-p.timeleft/p.vitesse) * (p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)))
                 p.timeleft = (-p.timeleft%p.vitesse)
-                p.lastupdate = Date.now().toString()
             }
             else if(p.timeleft === 0){
                 total += p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)
                 p.timeleft = p.vitesse
-                p.lastupdate = Date.now().toString()
             }
             else{
                 p.timeleft -= time
-                p.lastupdate = Date.now().toString()
             }
         }
     })
+    w.lastupdate = Date.now().toString()
     context.world.money += total
     //TODO je sais pas pour le score si c'est ca
     context.world.score += total
@@ -65,8 +63,10 @@ module.exports = {
                 product.qt += args.quantite;
                 product.prix = this.prix * Math.pow(this.croissance, args.quantite)
                 context.world.money -= couttotal
+                context.world.score += 2
                 saveWorld(context)
             }
+            return product
         },
         lancerProductionProduit(parent, args, context) {
             updateMoney(context)
