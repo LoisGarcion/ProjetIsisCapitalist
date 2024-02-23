@@ -1,17 +1,18 @@
 const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
-
 let world = require("./world")
+const fs = require('fs');
 
 async function readUserWorld(user) {
     try {
-        const data = await fs.readFile("userworlds/"+ user + "world.json");
+        const data = await fs.promises.readFile("userworlds/"+ user + "-world.json");
         return JSON.parse(data);
     }
     catch(error) {
-        return world
+        throw new Error(`Erreur de la récupération du monde de l'utilisateur ${user} : ${error}'`);
     }
 }
+
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = require("./schema");
