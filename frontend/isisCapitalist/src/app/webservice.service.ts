@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createClient, fetchExchange } from '@urql/core';
-import { GET_WORLD } from '../Graphrequest'; // Add the missing import statement
+import { GET_WORLD } from '../graphrequest';
 import { GET_SERV } from './app.component';
 
 @Injectable({
