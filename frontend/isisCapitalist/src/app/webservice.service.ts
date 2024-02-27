@@ -8,8 +8,7 @@ import { GET_SERV } from './app.component';
 })
 export class WebserviceService {
 //le serveur est dans appcomponent.ts pour pouvoir le réutiliser partout
-  user = '';
-
+  user = localStorage.getItem('username')?.toString() ?? Math.floor(Math.random()*100000).toString();
   createClient() {
     return createClient({
       url: GET_SERV + "graphql",

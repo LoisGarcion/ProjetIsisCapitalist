@@ -1,6 +1,7 @@
 const {writeFile} = require("fs");
 
 function saveWorld(context)  {
+    console.log(context.user)
     writeFile("userworlds/" + context.user + "-world.json", JSON.stringify(context.world), err => {
         if (err) {
             console.error(err)
@@ -45,7 +46,7 @@ function updateMoney(context) {
     let w = context.world
     context.world.products.forEach(p => {
         let time = Date.now() - Number(w.lastupdate)
-        let qtProduit = calcQtProductionForElapseTime(p, time)
+        let qtProduit = calcQtProductionforElapseTime(p, time)
         total += qtProduit * p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)
     })
     w.lastupdate = Date.now().toString()
