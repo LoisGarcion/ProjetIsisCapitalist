@@ -5,19 +5,20 @@ const fs = require('fs');
 
 async function readUserWorld(user) {
     try {
-        const data = await fs.promises.readFile("userworlds/"+ user + "-world.json");
+
+        const data = await fs.promises.readFile("userworlds/" + user + "-world.json");
         return JSON.parse(data);
     }
     catch(error) {
-        throw new Error(`Erreur de la récupération du monde de l'utilisateur ${user} : ${error}'`);
+        return world;
     }
 }
-
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = require("./schema");
 // Provide resolver functions for your schema fields
 const resolvers = require("./resolvers");
+const {saveWorld} = require("./resolvers");
 const server = new ApolloServer({
     typeDefs, resolvers,
     context: async ({ req }) => ({

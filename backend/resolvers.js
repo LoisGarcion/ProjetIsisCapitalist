@@ -1,6 +1,7 @@
 const {writeFile} = require("fs");
 
 function saveWorld(context)  {
+    console.log(context.user)
     writeFile("userworlds/" + context.user + "-world.json", JSON.stringify(context.world), err => {
         if (err) {
             console.error(err)
@@ -9,34 +10,44 @@ function saveWorld(context)  {
     })
 }
 
+function calcQtProductionforElapseTime(product, elapseTime) {
+    let remainingTime = product.timeleft - elapseTime
+    if(!product.managerUnlocked){
+        if(product.timeleft !== 0 && remainingTime <= 0){
+            product.timeleft = 0
+            return 1
+        }
+        else if(product.timeleft!==0 && remainingTime > 0){
+            product.timeleft -= elapseTime
+            return 0
+        }
+        else{
+            return 0
+        }
+    }
+    else{
+        if(remainingTime < 0){
+            product.timeleft = (product.vitesse - (-remainingTime%product.vitesse))
+            return (1 + (Math.floor(-remainingTime/product.vitesse)))
+        }
+        else if(remainingTime === 0){
+            product.timeleft = product.vitesse
+            return 1
+        }
+        else{
+            product.timeleft -= elapseTime
+            return 0
+        }
+    }
+}
+
 function updateMoney(context) {
     let total = 0
     let w = context.world
     context.world.products.forEach(p => {
         let time = Date.now() - Number(w.lastupdate)
-        let remainingTime = p.timeleft - time
-        if(!p.managerUnlocked){
-            if(p.timeleft !== 0 && remainingTime <= 0){
-                total += p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)
-                p.timeleft = 0
-            }
-            else if(p.timeleft!==0 && remainingTime > 0){
-                p.timeleft -= time
-            }
-        }
-        else{
-            if(remainingTime < 0){
-                total += (1 + (-remainingTime/p.vitesse) * (p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)))
-                p.timeleft = (-remainingTime%p.vitesse)
-            }
-            else if(remainingTime === 0){
-                total += p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)
-                p.timeleft = p.vitesse
-            }
-            else{
-                p.timeleft -= time
-            }
-        }
+        let qtProduit = calcQtProductionforElapseTime(p, time)
+        total += qtProduit * p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)
     })
     w.lastupdate = Date.now().toString()
     context.world.money += total

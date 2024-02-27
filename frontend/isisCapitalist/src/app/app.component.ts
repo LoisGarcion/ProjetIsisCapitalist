@@ -24,11 +24,18 @@ export class AppComponent {
       this.username = Math.floor(Math.random()*100000).toString();
     }
     localStorage.setItem('username', this.username);
+    this.service.getWorld().then(
+      world => {
+        console.log(world);
+        this.world = world.data.getWorld;
+      }
+    );
   }
 
   constructor(private service: WebserviceService) {
     this.service.getWorld().then(
       world => {
+        console.log(world);
         this.world = world.data.getWorld;
       }
     );
