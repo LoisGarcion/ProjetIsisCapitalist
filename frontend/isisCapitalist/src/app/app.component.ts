@@ -24,7 +24,6 @@ export class AppComponent {
       this.username = Math.floor(Math.random()*100000).toString();
     }
     localStorage.setItem('username', this.username);
-    console.log("test")
   }
 
   constructor(private service: WebserviceService) {

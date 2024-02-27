@@ -2,14 +2,28 @@
   <header>
     <span><img [attr.src]="server+world.logo" /> </span>
     <p>{{world.name}}</p>
+    <p>ARGENT</p>
     <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"/>  
   </header>
   <div class="container">
     <div class="leftmenu">
-
+      <button>
+          <p>Unlocks</p>
+      </button>
+      <button>
+        <p>Cash Upgrades</p>
+      </button>
+      <button>
+        <p>Angel Upgrades</p>
+      </button>
+      <button>
+        <p>Managers</p>
+      </button>
+      <button>
+        <p>Investors</p>
+      </button>
     </div>
     <div class="productlist">
-
     </div>
   </div>
 </main>
