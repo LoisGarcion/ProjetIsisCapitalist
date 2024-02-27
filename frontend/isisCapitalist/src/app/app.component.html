@@ -1,12 +1,13 @@
 <main>
   <header>
-    <span><img [attr.src]="server+world.logo" /> </span>
+    <span class="logo"><img [attr.src]="server+world.logo" /> </span>
     <p>{{world.name}}</p>
     <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"/>  
   </header>
   <div class="container">
+    <p></p>
     <div class="leftmenu">
-
+     <h1>upgrades</h1>
     </div>
     <div class="productlist">
 
