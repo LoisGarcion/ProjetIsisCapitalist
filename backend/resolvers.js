@@ -10,7 +10,7 @@ function saveWorld(context)  {
     })
 }
 
-function calcQtProductionforElapseTime(product, elapseTime) {
+function calcQtProductionforElapseTime(product, elapseTime) { //RECALER LE TEMPS DES LE DEPART A 0
     let remainingTime = product.timeleft - elapseTime
     if(!product.managerUnlocked){
         if(product.timeleft !== 0 && remainingTime <= 0){
@@ -51,7 +51,6 @@ function updateMoney(context) {
     })
     w.lastupdate = Date.now().toString()
     context.world.money += total
-    //TODO je sais pas pour le score si c'est ca
     context.world.score += total
 }
 
