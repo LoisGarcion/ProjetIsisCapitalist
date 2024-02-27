@@ -11,38 +11,37 @@ function saveWorld(context)  {
 
 function updateMoney(context) {
     let total = 0
+    let w = context.world
     context.world.products.forEach(p => {
-        let time = Date.now() - p.lastupdate.toInt()
+        let time = Date.now() - Number(w.lastupdate)
+        let remainingTime = p.timeleft - time
         if(!p.managerUnlocked){
-            if(p.timeleft < 0){
+            if(p.timeleft !== 0 && remainingTime <= 0){
                 total += p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)
+                p.timeleft = 0
             }
-            else if(p.timeleft > 0){
+            else if(p.timeleft!==0 && remainingTime > 0){
                 p.timeleft -= time
-                p.lastupdate = Date.now().toString()
             }
         }
         else{
-            if(p.timeleft < 0){
-                total += (1 + (-p.timeleft/p.vitesse) * (p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)))
-                p.timeleft = (-p.timeleft%p.vitesse)
-                p.lastupdate = Date.now().toString()
+            if(remainingTime < 0){
+                total += (1 + (-remainingTime/p.vitesse) * (p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)))
+                p.timeleft = (-remainingTime%p.vitesse)
             }
-            else if(p.timeleft === 0){
+            else if(remainingTime === 0){
                 total += p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)
                 p.timeleft = p.vitesse
-                p.lastupdate = Date.now().toString()
             }
             else{
                 p.timeleft -= time
-                p.lastupdate = Date.now().toString()
             }
         }
     })
+    w.lastupdate = Date.now().toString()
     context.world.money += total
     //TODO je sais pas pour le score si c'est ca
     context.world.score += total
-    saveWorld(context)
 }
 
 module.exports = {
@@ -61,12 +60,16 @@ module.exports = {
                 throw new Error(`Le produit avec l'id ${args.id} n'existe pas`)
             }
             if (product) {
-                let couttotal = this.prix * (1 - Math.pow(this.croissance, args.quantite) / (- this.croissance))
-                product.qt += args.quantite;
-                product.prix = this.prix * Math.pow(this.croissance, args.quantite)
+                let couttotal = product.cout * (1 - Math.pow(product.croissance, args.quantite) / (- product.croissance))
+                if(context.world.money < couttotal){
+                    throw new Error(`Vous n'avez pas assez d'argent pour acheter ${args.quantite} ${product.name}`)
+                }
+                product.quantite += args.quantite;
+                product.cout = product.cout * Math.pow(product.croissance, args.quantite)
                 context.world.money -= couttotal
                 saveWorld(context)
             }
+            return product
         },
         lancerProductionProduit(parent, args, context) {
             updateMoney(context)
@@ -74,7 +77,7 @@ module.exports = {
             if(!product){
                 throw new Error(`Le produit avec l'id ${args.id} n'existe pas`)
             }
-            if (product) {
+            if (product && product.timeleft === 0) {
                 product.timeleft = product.vitesse
                 product.lastupdate = Date.now()
                 saveWorld(context)
