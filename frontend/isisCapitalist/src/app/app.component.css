@@ -1,12 +1,12 @@
 .logo{
 text-align: center;
-background-color: blue;
+
 }
 
 header{ 
     display: flex;
     justify-content: space-around;
-    background-color: green;
+    background-color: gray;
     text-align: left;
     align-items: center;
 }
@@ -31,14 +31,15 @@ header{ grid-area: entete; }
 
 .leftmenu{
     border-radius: 10px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
     background-color: blanchedalmond;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    vertical-align: middle;
 }
 
 button{
+    margin: 5px;
     text-align: center;
 }
 
@@ -47,7 +48,7 @@ button{
 
 .productlist{
     border-radius: 10px;
-     background-color: orangered;
+     background-color: darkseagreen;
 
 }
 
