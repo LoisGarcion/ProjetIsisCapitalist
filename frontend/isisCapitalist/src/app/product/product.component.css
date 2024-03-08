@@ -22,6 +22,12 @@
 .rightbox{
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.progressbardiv{
+  margin-bottom: 3vh;
 }
 
 .boxrightdown{
@@ -30,11 +36,11 @@
 }
 
 .boxrightdown button{
-  width: 30%;
+  width: 50%;
 }
 
 .boxrightdown .timeleft{
-  width: 30%;
+  width: 50%;
   background-color: grey;
   border-radius: 30px;
   text-align: center;

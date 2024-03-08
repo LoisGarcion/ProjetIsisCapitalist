@@ -1,11 +1,12 @@
 <div class="product">
   <div class="leftbox">
-    <img class="round" [attr.src]="GET_SERV+product.logo"/>
+    <img class="round" [attr.src]="GET_SERV+product.logo" (click)="startProduction()"/>
     <p>{{product.quantite}}</p>
   </div>
   <div class="rightbox">
-    <!-- TODO progress bar -->
-    <p>JE SUIS UNE PROGRESS BAR et je rapporte {{product.revenu * product.quantite | bigvalue}}$</p> <!-- TODO multiplier avec unlock et upgrade tout ca tout ca -->
+    <div class="progressbardiv">
+      <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar> <!-- MODIFIER AVEC CELLE SUR MOODLE -->
+    </div>
     <div class="boxrightdown">
       <button>
         <p>Buy {{product.cout}}$</p> <!-- TODO Multiplier par le nombre de produit qu'on veut acheter à la fois-->
