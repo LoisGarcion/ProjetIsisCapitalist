@@ -1,4 +1,41 @@
-.product{
+.product {
   display: flex;
-  background-color: palegoldenrod;
+  background-color: lightgoldenrodyellow;
+  width: 40%;
+  border-radius: 30px;
+  margin-left: 10vh;
+  margin-bottom: 10vh;
+  align-items: center;
+  justify-content: space-around;
+}
+.leftbox{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.leftbox p{
+  background-color: grey;
+  border-radius: 30px;
+}
+
+.rightbox{
+  display: flex;
+  flex-direction: column;
+}
+
+.boxrightdown{
+  display: flex;
+  flex-direction: row;
+}
+
+.boxrightdown button{
+  width: 30%;
+}
+
+.boxrightdown .timeleft{
+  width: 30%;
+  background-color: grey;
+  border-radius: 30px;
+  text-align: center;
 }

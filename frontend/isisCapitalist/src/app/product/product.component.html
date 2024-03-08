@@ -3,5 +3,16 @@
     <img class="round" [attr.src]="GET_SERV+product.logo"/>
     <p>{{product.quantite}}</p>
   </div>
-  <
+  <div class="rightbox">
+    <!-- TODO progress bar -->
+    <p>JE SUIS UNE PROGRESS BAR et je rapporte {{product.revenu * product.quantite | bigvalue}}$</p> <!-- TODO multiplier avec unlock et upgrade tout ca tout ca -->
+    <div class="boxrightdown">
+      <button>
+        <p>Buy {{product.cout}}$</p> <!-- TODO Multiplier par le nombre de produit qu'on veut acheter à la fois-->
+      </button>
+      <div class="timeleft">
+        <p>{{product.timeleft != 0 ? product.timeleft : product.vitesse}}</p>
+      </div>
+    </div>
+  </div>
 </div>

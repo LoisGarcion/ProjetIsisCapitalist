@@ -1,11 +1,14 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Product } from '../world';
 import {GET_SERV} from "../app.component";
+import {BigvaluePipe} from "../bigvalue.pipe";
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [],
+  imports: [
+    BigvaluePipe
+  ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
