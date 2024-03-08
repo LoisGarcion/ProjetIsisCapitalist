@@ -3,13 +3,14 @@ import { RouterOutlet } from '@angular/router';
 import { World, Palier, Product } from './world';
 import { WebserviceService } from './webservice.service';
 import { FormsModule } from '@angular/forms';
+import { ProductComponent } from './product/product.component';
 
 export const GET_SERV = "http://localhost:4000/";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule],
+  imports: [RouterOutlet, FormsModule, ProductComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
