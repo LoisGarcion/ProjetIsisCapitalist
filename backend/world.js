@@ -52,7 +52,7 @@ module.exports = {
         {
         "id": 2,
         "name": "Sbire cannon",
-        "logo": "icones/sbirecannon.jpg",
+        "logo": "icones/sbirecanon.png",
         "cout": 50,
         "croissance": 1.07,
         "revenu": 20,

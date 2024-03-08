@@ -30,8 +30,9 @@ header{ grid-area: entete; }
   .productlist { grid-area: objets; }
 
 .leftmenu{
-    border-radius: 10px;
-    background-color: blanchedalmond;
+    border-radius: 5px;
+    background-color: palevioletred;
+    background-image: url("/backend//public/icones/");
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
