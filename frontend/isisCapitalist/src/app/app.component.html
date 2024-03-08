@@ -1,11 +1,12 @@
 <main>
+  <div class="container">
   <header>
     <span class="logo"><img [attr.src]="server+world.logo" /> </span>
     <p>{{world.name}}</p>
     <span [innerHTML]="world.money | bigvalue"> </span>
     <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"/>
   </header>
-  <div class="container">
+
     <div class="leftmenu">
       <button>
           <p>Unlocks</p>
