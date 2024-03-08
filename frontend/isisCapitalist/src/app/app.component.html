@@ -2,7 +2,7 @@
   <header>
     <span class="logo"><img [attr.src]="server+world.logo" /> </span>
     <p>{{world.name}}</p>
-    <p>ARGENT</p>
+    <span [innerHTML]="world.money | bigvalue"> </span>
     <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"/>
   </header>
   <div class="container">

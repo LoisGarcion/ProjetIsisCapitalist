@@ -4,13 +4,14 @@ import { World, Palier, Product } from './world';
 import { WebserviceService } from './webservice.service';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
+import {BigvaluePipe} from "./bigvalue.pipe";
 
 export const GET_SERV = "http://localhost:4000/";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, ProductComponent],
+  imports: [RouterOutlet, FormsModule, ProductComponent, BigvaluePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

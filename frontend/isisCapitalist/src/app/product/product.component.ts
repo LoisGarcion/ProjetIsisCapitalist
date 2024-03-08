@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Product } from '../world';
+import {GET_SERV} from "../app.component";
 
 @Component({
   selector: 'app-product',
@@ -20,6 +21,8 @@ export class ProductComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    
+
   }
+
+  protected readonly GET_SERV = GET_SERV;
 }
