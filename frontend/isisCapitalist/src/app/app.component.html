@@ -25,7 +25,9 @@
       </button>
     </div>
     <div class="productlist">
-
+      @for(product of world.products; track product.id){
+        <app-product [prod]="product"/>
+      }
     </div>
   </div>
 </main>

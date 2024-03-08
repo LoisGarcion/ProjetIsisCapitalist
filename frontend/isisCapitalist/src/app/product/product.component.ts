@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
+import { Product } from '../world';
 
 @Component({
   selector: 'app-product',
@@ -7,6 +8,18 @@ import { Component } from '@angular/core';
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent {
+export class ProductComponent implements OnChanges {
+  product: Product = new Product();
 
+  constructor() {
+  }
+
+  @Input()
+  set prod(value: Product) {
+    this.product = value;
+  }
+
+  ngOnChanges(): void {
+    
+  }
 }
