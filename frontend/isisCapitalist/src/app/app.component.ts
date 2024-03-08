@@ -21,6 +21,7 @@ export class AppComponent {
   world: World = new World();
   username: string = localStorage.getItem('username')?.toString() ?? Math.floor(Math.random()*100000).toString();
 
+
   onUsernameChanged(){
     if(this.username == ""){
       this.username = Math.floor(Math.random()*100000).toString();

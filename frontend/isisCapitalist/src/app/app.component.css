@@ -32,7 +32,7 @@ header{ grid-area: entete; }
 .leftmenu{
     border-radius: 5px;
     background-color: palevioletred;
-    background-image: url("/backend//public/icones/");
+background-image: url("/backend//public/icones/");
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

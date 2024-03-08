@@ -11,7 +11,6 @@ import {GET_SERV} from "../app.component";
 })
 export class ProductComponent implements OnChanges {
   product: Product = new Product();
-
   constructor() {
   }
 
