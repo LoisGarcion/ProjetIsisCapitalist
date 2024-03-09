@@ -20,6 +20,7 @@ export class AppComponent {
   server = GET_SERV;
   world: World = new World();
   username: string = localStorage.getItem('username')?.toString() ?? Math.floor(Math.random()*100000).toString();
+  qtMulti: number = 1;
 
 
   onUsernameChanged(){
@@ -42,5 +43,23 @@ export class AppComponent {
         this.world = world.data.getWorld;
       }
     );
+  }
+
+  onProductionDone(product: Product){
+    this.world.money = this.world.money + product.revenu * product.quantite;
+  }
+
+  changeQt(){
+    switch(this.qtMulti){
+      case 1:
+        this.qtMulti = 10;
+        break;
+      case 10:
+        this.qtMulti = 100;
+        break;
+      case 100:
+        this.qtMulti = 1;
+        break;
+    }
   }
 }

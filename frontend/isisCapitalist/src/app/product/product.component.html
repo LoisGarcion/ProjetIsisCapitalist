@@ -5,14 +5,18 @@
   </div>
   <div class="rightbox">
     <div class="progressbardiv">
-      <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar> <!-- MODIFIER AVEC CELLE SUR MOODLE -->
+      <app-my-progress-bar [run]="run" [auto]="auto"
+                           [orientation]="Orientation.horizontal"
+                           [vitesse]="product.vitesse"
+                           [initialValue]="initialValue">
+      </app-my-progress-bar>
     </div>
     <div class="boxrightdown">
       <button>
         <p>Buy {{product.cout}}$</p> <!-- TODO Multiplier par le nombre de produit qu'on veut acheter à la fois-->
       </button>
       <div class="timeleft">
-        <p>{{product.timeleft != 0 ? product.timeleft : product.vitesse}}</p>
+        <p>{{product.timeleft != 0 ? formatMilliseconds(product.timeleft) : formatMilliseconds(product.vitesse)}}</p>
       </div>
     </div>
   </div>

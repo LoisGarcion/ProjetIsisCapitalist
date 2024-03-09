@@ -5,6 +5,9 @@
     <p>{{world.name}}</p>
     <span [innerHTML]="world.money | bigvalue"> </span>
     <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"/>
+    <button (click)="changeQt()">
+      <p>{{qtMulti}}</p>
+    </button>
   </header>
 
     <div class="leftmenu" [style.background-image]="'url(backend\public\icones\fondUpgrades.png)'">
@@ -26,7 +29,7 @@
     </div>
     <div class="productlist">
       @for(product of world.products; track product.id){
-        <app-product [prod]="product"/>
+        <app-product [prod]="product" (notifyProduction)="onProductionDone($event)" [qtMulti]="this.qtMulti" [money]="this.world.money"/>
       }
     </div>
   </div>
