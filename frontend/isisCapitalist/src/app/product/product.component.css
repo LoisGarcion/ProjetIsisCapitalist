@@ -3,10 +3,12 @@
   background-color: lightgoldenrodyellow;
   width: 40%;
   border-radius: 30px;
+  margin-top: 15px;
   margin-left: 10vh;
   margin-bottom: 10vh;
   align-items: center;
   justify-content: space-around;
+
 }
 .leftbox{
   display: flex;

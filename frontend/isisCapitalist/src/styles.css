@@ -7,3 +7,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     height: 100px;
     border-radius: 50%;
 }
+
+
+button{
+
+    padding: 5px;
+    background-color: #454545;
+    border: 3px solid #61f4ff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition-duration: 200ms;
+    cursor: pointer;
+
+}
+
+button:hover{
+    background-color: #dddddd;
+    border-radius: 0px;
+    color: black;
+}
+
