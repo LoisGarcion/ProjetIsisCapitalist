@@ -24,6 +24,9 @@ export class ProductComponent implements OnChanges {
   lastUpdate: number = Date.now();
   qtMultiAchat: number = 1;
   worldMoney: number = 0;
+  canBuy = false;
+  numberBuyable = 0;
+  priceNumberBuyable = 0;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
@@ -33,9 +36,32 @@ export class ProductComponent implements OnChanges {
 
   ngAfterViewInit() {
     if (this.isBrowser()) {
-      setInterval(() => { this.calcScore() }, 100)
+      setInterval(() => { this.calcScore(); }, 100)
     }
   }
+
+  @Input()
+  set prod(value: Product) {
+    this.product = value;
+  }
+
+  @Input()
+  set qtMulti(value: number) {
+    this.qtMultiAchat = value;
+    this.canBuyAndHowMany();
+  }
+
+  @Input()
+  set money(value: number) {
+    this.worldMoney = value;
+    this.canBuyAndHowMany();
+  }
+
+  @Output()
+  notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
+
+  @Output()
+  onBuy: EventEmitter<number> = new EventEmitter<number>();
 
   formatMilliseconds(milliseconds: number): string {
     // Convert milliseconds to seconds
@@ -74,30 +100,68 @@ export class ProductComponent implements OnChanges {
   }
 
   startProduction() {
-    if(this.run == false){
+    if(!this.run){
       this.run = true;
       this.product.timeleft = this.product.vitesse;
       this.lastUpdate = Date.now();
     }
   }
 
-  @Input()
-  set prod(value: Product) {
-    this.product = value;
+  canBuyAndHowMany() {
+    let totalPrice = this.calcPriceNumberBuyable(this.qtMultiAchat);
+    switch (this.qtMultiAchat) {
+      case 1:
+        this.canBuy = this.worldMoney >= totalPrice;
+        this.numberBuyable = 1;
+        this.priceNumberBuyable = this.product.cout;
+        break;
+      case 10:
+        this.canBuy = this.worldMoney >= totalPrice;
+        this.numberBuyable = 10;
+        this.priceNumberBuyable = totalPrice;
+        break;
+      case 100:
+        this.canBuy = this.worldMoney >= totalPrice;
+        this.numberBuyable = 100;
+        this.priceNumberBuyable = totalPrice;
+        break;
+      case 0:
+        let max = this.calcMaxNumberBuyable();
+        if(max > 0){
+          this.canBuy = true;
+          this.numberBuyable = max;
+          this.priceNumberBuyable = this.calcPriceNumberBuyable(max);
+        }
+        else {
+          this.canBuy = false;
+          this.numberBuyable = 1;
+          this.priceNumberBuyable = this.product.cout;
+        }
+        break;
+    }
   }
 
-  @Input()
-  set qtMulti(value: number) {
-    this.qtMultiAchat = value;
+  calcMaxNumberBuyable() {
+    let numberOfItems = Math.floor(Math.log(1 + (this.worldMoney * (this.product.croissance - 1) / this.product.cout)) / Math.log(this.product.croissance));
+    console.log("nbItem: " + numberOfItems);
+    console.log("price: " + this.calcPriceNumberBuyable(numberOfItems));
+    return Math.floor(numberOfItems);
   }
 
-  @Input()
-  set money(value: number) {
-    this.worldMoney = value;
+  calcPriceNumberBuyable(number: number) {
+    let result = this.product.cout * (1 - Math.pow(this.product.croissance, number)) / (1 - this.product.croissance);
+    return Number(result.toFixed(2));
   }
 
-  @Output()
-  notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
+  buy(){
+    if(this.canBuy){
+      let total = this.priceNumberBuyable;
+      this.product.quantite += this.numberBuyable;
+      this.worldMoney -= total;
+      this.product.cout = this.product.cout * Math.pow(this.product.croissance, this.numberBuyable);
+      this.onBuy.emit(total);
+    }
+  }
 
   ngOnChanges(): void {
 

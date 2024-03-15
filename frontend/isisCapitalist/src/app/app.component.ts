@@ -49,7 +49,12 @@ export class AppComponent {
     this.world.money = this.world.money + product.revenu * product.quantite;
   }
 
+  onBuy(total: number){
+    this.world.money -= total;
+  }
+
   changeQt(){
+    //Ici on renvoie un nombre, donc pour le cas max on considère que c'est 0
     switch(this.qtMulti){
       case 1:
         this.qtMulti = 10;
@@ -58,6 +63,9 @@ export class AppComponent {
         this.qtMulti = 100;
         break;
       case 100:
+        this.qtMulti = 0;
+        break;
+      case 0:
         this.qtMulti = 1;
         break;
     }

@@ -12,8 +12,8 @@
       </app-my-progress-bar>
     </div>
     <div class="boxrightdown">
-      <button>
-        Buy {{product.cout}}$ <!-- TODO Multiplier par le nombre de produit qu'on veut acheter à la fois-->
+      <button [disabled]="!canBuy" (click)="buy()">
+        <p>Buy x{{numberBuyable}}  {{priceNumberBuyable}}$</p>
       </button>
       <div class="timeleft">
         <p>{{product.timeleft != 0 ? formatMilliseconds(product.timeleft) : formatMilliseconds(product.vitesse)}}</p>
