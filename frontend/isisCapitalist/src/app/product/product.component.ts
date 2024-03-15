@@ -154,7 +154,6 @@ export class ProductComponent implements OnChanges {
   }
 
   buy(){
-    console.log("buy " + this.canBuy)
     if(this.canBuy){
       let total = this.priceNumberBuyable;
       this.product.quantite += this.numberBuyable;

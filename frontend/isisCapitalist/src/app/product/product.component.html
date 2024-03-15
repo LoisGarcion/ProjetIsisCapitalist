@@ -12,7 +12,7 @@
       </app-my-progress-bar>
     </div>
     <div class="boxrightdown">
-      <button [disabled]="canBuy" (click)="buy()">
+      <button [disabled]="!canBuy" (click)="buy()">
         <p>Buy x{{numberBuyable}}  {{priceNumberBuyable}}$</p>
       </button>
       <div class="timeleft">
