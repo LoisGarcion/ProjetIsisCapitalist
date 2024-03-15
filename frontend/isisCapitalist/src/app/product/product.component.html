@@ -14,7 +14,7 @@
     <div class="boxrightdown">
   
       <button [disabled]="!canBuy" [class.disabled] = "!canBuy" (click)="buy()" >
-        Buy x{{numberBuyable}}:  {{priceNumberBuyable}} <img class="coin"src="../../assets/goldcoin.png" alt="">
+        Buy x{{numberBuyable}}:  {{priceNumberBuyable | bigvalue}}<img class="coin"src="../../assets/goldcoin.png" alt="">
       </button>
       <div class="timeleft">
         {{product.timeleft != 0 ? formatMilliseconds(product.timeleft) : formatMilliseconds(product.vitesse)}}
