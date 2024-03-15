@@ -47,4 +47,10 @@
   background-color: grey;
   border-radius: 30px;
   text-align: center;
+  
+}
+
+.coin{
+  width: 24px;
+  height: 24px;
 }

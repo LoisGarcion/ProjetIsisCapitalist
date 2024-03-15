@@ -1,7 +1,7 @@
 <div class="product">
   <div class="leftbox">
     <img class="round" [attr.src]="GET_SERV+product.logo" (click)="startProduction()"/>
-    <p>{{product.quantite}}</p>
+    {{product.quantite}}
   </div>
   <div class="rightbox">
     <div class="progressbardiv">
@@ -12,11 +12,12 @@
       </app-my-progress-bar>
     </div>
     <div class="boxrightdown">
+  
       <button [disabled]="!canBuy" (click)="buy()">
-        <p>Buy x{{numberBuyable}}  {{priceNumberBuyable}}$</p>
+        Buy x{{numberBuyable}}:  {{priceNumberBuyable}} <img class="coin"src="../../assets/goldcoin.png" alt="">
       </button>
       <div class="timeleft">
-        <p>{{product.timeleft != 0 ? formatMilliseconds(product.timeleft) : formatMilliseconds(product.vitesse)}}</p>
+        {{product.timeleft != 0 ? formatMilliseconds(product.timeleft) : formatMilliseconds(product.vitesse)}}
       </div>
     </div>
   </div>

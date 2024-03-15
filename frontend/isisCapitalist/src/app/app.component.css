@@ -1,20 +1,30 @@
 .logo{
 text-align: center;
-
+border-radius: 50%;
+background-color: rgb(182, 182, 182);
 }
 
 header{ 
     display: flex;
     justify-content: space-around;
-    background-color: gray;
+    background-image: url("../assets/banner_zaun.png");
+    background-size: 1200px;
     text-align: left;
     align-items: center;
 }
 
+header > span {
+    background-color: white ;
+}
+
+header > p {
+    background-color: white;
+    font-size:  15px;
+}
 
 .container {  display: grid;
-    grid-template-columns: 0.25fr 1.75fr 1fr;
-    grid-template-rows: 0.25fr 1.75fr 1fr;
+    grid-template-columns: 0.50fr 1.5fr 1fr;
+    grid-template-rows: 0.50fr 1.5fr 1fr;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
@@ -30,26 +40,38 @@ header{ grid-area: entete; }
   .productlist { grid-area: objets; }
 
 .leftmenu{
-    border-radius: 5px;
     background-color: palevioletred;
 background-image: url("/backend//public/icones/");
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     vertical-align: middle;
+    background-image: url("../assets/fondUpgrades.png");
+    background-size: 250px;
 }
 
-button{
+.leftmenu {
+border-right-width: 15px;
+border-right: solid;
+border-right-color: rgb(0, 194, 71);
+
+}
+
+.leftmenu > button{
     margin: 5px;
+    border-radius: 0;
     text-align: center;
+    -ms-transform: skewX(-20deg);
+    -webkit-transform: skewX(-20deg);
+    transform: skewX(-20deg);
 }
 
 
 
 
 .productlist{
-    border-radius: 10px;
-     background-color: darkseagreen;
+     background-image: url("../assets/zaun-depths.jpg");
+     background-size: 1000px;
 
 }
 
