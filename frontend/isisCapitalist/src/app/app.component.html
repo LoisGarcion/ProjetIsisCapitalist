@@ -6,7 +6,7 @@
     <span [innerHTML]="world.money | bigvalue"> </span>
     <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"/>
     <button (click)="changeQt()">
-      <p>{{qtMulti}}</p>
+      <p>{{qtMulti != 0 ? "x" + qtMulti : "Max"}}</p>
     </button>
   </header>
 
@@ -29,7 +29,7 @@
     </div>
     <div class="productlist">
       @for(product of world.products; track product.id){
-        <app-product [prod]="product" (notifyProduction)="onProductionDone($event)" [qtMulti]="this.qtMulti" [money]="this.world.money"/>
+        <app-product [prod]="product" (notifyProduction)="onProductionDone($event)" (onBuy)="onBuy($event)" [qtMulti]="this.qtMulti" [money]="this.world.money"/>
       }
     </div>
   </div>
