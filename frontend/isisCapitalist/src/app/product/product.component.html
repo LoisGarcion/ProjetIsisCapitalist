@@ -13,7 +13,7 @@
     </div>
     <div class="boxrightdown">
   
-      <button [disabled]="!canBuy" (click)="buy()">
+      <button [disabled]="!canBuy" [class.disabled] = "!canBuy" (click)="buy()" >
         Buy x{{numberBuyable}}:  {{priceNumberBuyable}} <img class="coin"src="../../assets/goldcoin.png" alt="">
       </button>
       <div class="timeleft">
