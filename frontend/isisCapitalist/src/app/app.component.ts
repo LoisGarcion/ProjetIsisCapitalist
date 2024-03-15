@@ -5,6 +5,8 @@ import { WebserviceService } from './webservice.service';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import {BigvaluePipe} from "./bigvalue.pipe";
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent, DialogData } from './popup/popup.component';
 
 export const GET_SERV = "http://localhost:4000/";
 
@@ -36,7 +38,7 @@ export class AppComponent {
     );
   }
 
-  constructor(private service: WebserviceService) {
+  constructor(private service: WebserviceService, public dialog: MatDialog){
     this.service.getWorld().then(
       world => {
         console.log(world);
@@ -69,5 +71,11 @@ export class AppComponent {
         this.qtMulti = 1;
         break;
     }
+  }
+  openPopup(purpose: string){
+    const dialogRef = this.dialog.open(PopupComponent, {
+      data: {world: this.world, popupPurpose: purpose},
+      width: '60%'
+    });
   }
 }

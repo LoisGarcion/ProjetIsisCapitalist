@@ -18,6 +18,6 @@ export class BigvaluePipe implements PipeTransform {
     }
     return res;
   }
-   
+
 
 }
