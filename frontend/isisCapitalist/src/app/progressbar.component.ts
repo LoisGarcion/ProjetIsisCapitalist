@@ -52,6 +52,9 @@ export class MyProgressBarComponent implements OnChanges, OnDestroy {
     if (changes.hasOwnProperty('run')) {
       this.restartAnim();
     }
+    if (changes.hasOwnProperty('auto')) {
+      this.restartAnim();
+    }
   }
 
   restartAnim() {

@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, EventEmitter, Inject, Output} from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -6,7 +6,7 @@ import {
   MatDialogContent, MatDialogRef, MatDialogActions, MatDialogClose,
 } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-import {Product, World} from "../world";
+import {Palier, Product, World} from "../world";
 import {GET_SERV} from "../app.component";
 import {ProductComponent} from "../product/product.component";
 
@@ -28,6 +28,8 @@ export class PopupComponent {
   protected readonly GET_SERV = GET_SERV;
   protected readonly Product = Product;
 
+  @Output() notifyBuyManager: EventEmitter<Palier> = new EventEmitter<Palier>();
+
   getProductNameById(idcible: number) {
     if(this.data.world.products !== undefined && idcible !== undefined) {
       const product = this.data.world.products.find(p => p.id === idcible);
@@ -38,4 +40,7 @@ export class PopupComponent {
     return "Unknown product";
   }
 
+  buyManager(manager: Palier) {
+    this.notifyBuyManager.emit(manager);
+  }
 }

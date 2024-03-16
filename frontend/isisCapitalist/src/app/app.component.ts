@@ -72,10 +72,20 @@ export class AppComponent {
         break;
     }
   }
-  openPopup(purpose: string){
+  openPopup(purpose: string, ){
     const dialogRef = this.dialog.open(PopupComponent, {
       data: {world: this.world, popupPurpose: purpose},
       width: '60%'
     });
+      dialogRef.componentInstance.notifyBuyManager.subscribe((manager: Palier) => {
+        const manIndex = this.world.managers.findIndex(m => m.name === manager.name);
+        let man = this.world.managers[manIndex];
+        const prodIndex = this.world.products.findIndex(p => p.id === man.idcible);
+        if (manIndex !== -1) {
+          this.world.managers[manIndex].unlocked = true;
+          this.world.money -= man.seuil
+          this.world.products[prodIndex].managerUnlocked = true;
+        }
+      });
   }
 }
