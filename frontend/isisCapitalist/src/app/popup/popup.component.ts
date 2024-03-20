@@ -9,6 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {Palier, Product, World} from "../world";
 import {GET_SERV} from "../app.component";
 import {ProductComponent} from "../product/product.component";
+import {WebserviceService} from "../webservice.service";
 
 export interface DialogData {
   world: World;
@@ -22,7 +23,7 @@ export interface DialogData {
   styleUrl: './popup.component.css'
 })
 export class PopupComponent {
-  constructor(public ref: MatDialogRef<PopupComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  constructor(public ref: MatDialogRef<PopupComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: WebserviceService) {
   }
 
   protected readonly GET_SERV = GET_SERV;
@@ -42,5 +43,6 @@ export class PopupComponent {
 
   buyManager(manager: Palier) {
     this.notifyBuyManager.emit(manager);
+    this.service.engagerManager(manager).catch(reason => console.log("erreur : " + reason));
   }
 }

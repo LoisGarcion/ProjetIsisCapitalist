@@ -70,7 +70,7 @@ module.exports = {
                 throw new Error(`Le produit avec l'id ${args.id} n'existe pas`)
             }
             if (product) {
-                let couttotal = product.cout * (1 - Math.pow(product.croissance, args.quantite) / (- product.croissance))
+                let couttotal = product.cout * (1 - Math.pow(product.croissance, args.quantite)) / (1 - product.croissance)
                 if(context.world.money < couttotal){
                     throw new Error(`Vous n'avez pas assez d'argent pour acheter ${args.quantite} ${product.name}`)
                 }

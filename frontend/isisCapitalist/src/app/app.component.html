@@ -1,5 +1,5 @@
 <main>
-  
+
   <div class="container">
   <header>
     <span class="logo"><img [attr.src]="server+world.logo" /> </span>
@@ -11,9 +11,9 @@
       <p>{{qtMulti != 0 ? "x" + qtMulti : "Max"}}</p>
     </button>
   </div>
-    
+
   </header>
-    
+
     <div class="leftmenu">
       <button>
           Unlocks
@@ -24,7 +24,7 @@
       <button>
         Angel Upgrades
       </button>
-      <button (click)="openPopup('managers')">
+      <button [matBadge]="managerBadge" matBadgePosition="before" [matBadgeHidden]="managerBadge == 0" (click)="openPopup('managers')">
        Managers
       </button>
       <button>

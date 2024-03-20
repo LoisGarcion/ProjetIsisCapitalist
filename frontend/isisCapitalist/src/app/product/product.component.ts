@@ -4,6 +4,7 @@ import {GET_SERV} from "../app.component";
 import {BigvaluePipe} from "../bigvalue.pipe";
 import {isPlatformBrowser} from "@angular/common";
 import {MyProgressBarComponent, Orientation} from "../progressbar.component";
+import {WebserviceService} from "../webservice.service";
 
 @Component({
   selector: 'app-product',
@@ -19,7 +20,7 @@ export class ProductComponent implements OnChanges {
   product: Product = new Product();
   run: boolean = this.product.timeleft != 0;
   auto: boolean = this.product.managerUnlocked;
-  initialValue: number = this.product.timeleft;
+  initialValue: number = 0;
   isBrowser = signal(false);
   lastUpdate: number = Date.now();
   qtMultiAchat: number = 1;
@@ -28,9 +29,7 @@ export class ProductComponent implements OnChanges {
   numberBuyable = 0;
   priceNumberBuyable = 0;
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
-  ) {
+  constructor(@Inject(PLATFORM_ID) private platformId: object, private service: WebserviceService) {
     this.isBrowser.set(isPlatformBrowser(platformId));
   }
 
@@ -43,6 +42,9 @@ export class ProductComponent implements OnChanges {
   @Input()
   set prod(value: Product) {
     this.product = value;
+    this.run = this.product.timeleft != 0;
+    this.auto = this.product.managerUnlocked;
+    this.initialValue = this.product.timeleft;
   }
 
   @Input()
@@ -108,9 +110,13 @@ export class ProductComponent implements OnChanges {
 
   startProduction() {
     if(!this.run){
-      this.run = true;
       this.product.timeleft = this.product.vitesse;
+      this.run = true;
       this.lastUpdate = Date.now();
+      this.service.lancerProduction(this.product).catch(reason =>
+        console.log("erreur: " + reason)
+      );
+      this.initialValue = 0;
     }
   }
 
@@ -165,6 +171,9 @@ export class ProductComponent implements OnChanges {
       this.worldMoney -= total;
       this.product.cout = this.product.cout * Math.pow(this.product.croissance, this.numberBuyable);
       this.onBuy.emit(total);
+      this.service.acheterQtProduit(this.product,this.numberBuyable).then(result => console.log(result)).catch(reason =>
+        console.log("erreur: " + reason)
+      );
     }
   }
 

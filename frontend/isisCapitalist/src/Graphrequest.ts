@@ -69,4 +69,28 @@ export const GET_WORLD = gql`
         }
         }
     }
-`  
+`
+
+export const LANCER_PRODUCTION = gql`
+ mutation lancerProductionProduit($id: Int!) {
+  lancerProductionProduit(id: $id) {
+    id
+  }
+ }
+`
+
+export const ENGAGER_MANAGER = gql`
+  mutation engagerManager($name: String!) {
+    engagerManager(name: $name) {
+      name
+    }
+  }
+`
+
+export const ACHETER_QT_PRODUIT = gql`
+  mutation acheterQtProduit($id: Int!, $quantite: Int!) {
+    acheterQtProduit(id: $id, quantite: $quantite) {
+      id
+    }
+  }
+`
