@@ -1,6 +1,9 @@
 <h2 mat-dialog-title>{{data.popupPurpose}}</h2>
 @if(data.popupPurpose === 'managers'){
   <mat-dialog-content>
+    @if(data.world.managers.length === 0){
+      <p>Vous n'avez pas encore de managers.</p>
+    }
     @for(manager of data.world.managers; track manager.name){
       @if(!manager.unlocked){
         <div class="manager">

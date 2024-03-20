@@ -5,14 +5,14 @@
   </div>
   <div class="rightbox">
     <div class="progressbardiv">
-      <app-my-progress-bar [run]="run" [auto]="auto"
+      <app-my-progress-bar [run]="run" [auto]="this.product.managerUnlocked"
                            [orientation]="Orientation.horizontal"
                            [vitesse]="product.vitesse"
                            [initialValue]="initialValue">
       </app-my-progress-bar>
     </div>
     <div class="boxrightdown">
-  
+
       <button [disabled]="!canBuy" [class.disabled] = "!canBuy" (click)="buy()" >
         Buy x{{numberBuyable}}:  {{priceNumberBuyable | bigvalue}}<img class="coin"src="../../assets/goldcoin.png" alt="">
       </button>
