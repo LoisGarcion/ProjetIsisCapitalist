@@ -7,13 +7,14 @@ import { ProductComponent } from './product/product.component';
 import {BigvaluePipe} from "./bigvalue.pipe";
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent, DialogData } from './popup/popup.component';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 export const GET_SERV = "http://localhost:4000/";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, ProductComponent, BigvaluePipe],
+  imports: [RouterOutlet, FormsModule, ProductComponent, BigvaluePipe,MatSnackBarModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -38,7 +39,7 @@ export class AppComponent {
     );
   }
 
-  constructor(private service: WebserviceService, public dialog: MatDialog){
+  constructor(private service: WebserviceService, public dialog: MatDialog, private snackBar: MatSnackBar) {
     this.service.getWorld().then(
       world => {
         console.log(world);
@@ -85,6 +86,7 @@ export class AppComponent {
           this.world.managers[manIndex].unlocked = true;
           this.world.money -= man.seuil
           this.world.products[prodIndex].managerUnlocked = true;
+          this.snackBar.open("Le manager " + this.world.managers[manIndex].name + " a bien été acheté !", "", { duration : 2000 })
         }
       });
   }

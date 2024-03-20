@@ -17,7 +17,7 @@ import {MyProgressBarComponent, Orientation} from "../progressbar.component";
 })
 export class ProductComponent implements OnChanges {
   product: Product = new Product();
-  run: boolean = this.product.timeleft != 0 || this.product.managerUnlocked;
+  run: boolean = this.product.timeleft != 0;
   auto: boolean = this.product.managerUnlocked;
   initialValue: number = this.product.timeleft;
   isBrowser = signal(false);
