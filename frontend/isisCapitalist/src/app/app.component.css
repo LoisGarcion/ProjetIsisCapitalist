@@ -1,55 +1,96 @@
 @import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
-
-.logo{
-text-align: center;
-border-radius: 50%;
-background-color: rgb(182, 182, 182);
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&family=Tillana:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geo:ital@0;1&family=Holtwood+One+SC&family=Tillana:wght@400;500;600;700;800&display=swap');
+.logo {
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(182, 182, 182);
 }
 
-header{ 
+header {
     display: flex;
     justify-content: space-around;
     background-image: url("../assets/steampunk_bg.jpeg");
     background-size: 50%;
-    clip:rect(0, 0, 500px, 500px);
+    clip: rect(0, 0, 500px, 500px);
     text-align: left;
     align-items: center;
     border-bottom: 15px;
     border: solid;
     border-bottom-color: green;
 }
-header > span {
-    background-color: white;
+
+.header-content{
+    width: 60%;
+    height: 50%;
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+    align-items: center;
+    background-color: gray
 }
 
-header > p {
-    background-color: white;
-    font-family: "Holtwood One SC", serif;
+.leftmenu > button {
+    font-family: "Tillana", system-ui;
     font-weight: 400;
+    font-size: larger;
     font-style: normal;
 }
 
+header>span {
+    background-color: white;
+}
 
-.container {  display: grid;
+.header-content > h1{
+    margin-bottom: 0;
+    background: linear-gradient(to left, #EA874A, #1affa7);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: "Holtwood One SC", serif;
+    font-weight: 800;
+    font-size: 35px;
+    font-style: normal;
+}
+.header-content > div > span{
+    font-size: 40px;
+    font-family: "Geo", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+.header-content > div {
+    vertical-align: center;
+    align-items: center;
+}
+/* todo faire marcher cte merde */
+.container {
+    display: grid;
     grid-template-columns: 0.50fr 1.5fr 1fr;
     grid-template-rows: 0.50fr 1.5fr 1fr;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
-      "entete entete entete"
-      "ameliorations objets objets"
-      "ameliorations objets objets";
-  }
-  
-  .leftmenu { grid-area: ameliorations; }
-  
-header{ grid-area: entete; }
-  
-  .productlist { grid-area: objets; }
+        "    entete    entete entete"
+        "ameliorations objets objets"
+        "ameliorations objets objets";
+}
 
-.leftmenu{
-    background-color: palevioletred;
-background-image: url("/backend//public/icones/");
+.leftmenu {
+    grid-area: ameliorations;
+}
+
+header {
+    grid-area: entete;
+}
+
+.productlist {
+    grid-area: objets;
+}
+
+.leftmenu {
+    background-image: url("/backend//public/icones/");
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -59,34 +100,35 @@ background-image: url("/backend//public/icones/");
 }
 
 .leftmenu {
-border-right-width: 15px;
-border-right: solid;
-border-right-color: rgb(0, 194, 71);
+    border-right-width: 15px;
+    border-right: solid;
+    border-right-color: rgb(0, 194, 71);
 
 }
 
-.leftmenu > button{
+
+.leftmenu>button {
     margin: 5px;
     border-radius: 0;
     text-align: center;
-    -ms-transform: skewX(-20deg);
-    -webkit-transform: skewX(-20deg);
-    transform: skewX(-20deg);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
 }
 
 
 
 
-.productlist{
-     background-image: url("../assets/zaun-depths.jpg");
-     background-size: 1000px;
+.productlist {
+    background-image: url("../assets/zaun-depths.jpg");
+    background-size: 1000px;
 
 }
 
-img{
+img {
     width: 200px;
-height: 200px;
+    height: 200px;
 }
 
-
-  
+.coin{
+    width: 32px;
+    height: 32px;
+  }

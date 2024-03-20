@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&family=Tillana:wght@400;500;600;700;800&display=swap');
+
 
 html,
 body {
@@ -55,8 +55,7 @@ button:hover {
     color: black;
 }
 
-p {
-    font-family: "Tillana", system-ui;
-    font-weight: 400;
-    font-style: normal;
-}
+.coin{
+    width: 24px;
+    height: 24px;
+  }
