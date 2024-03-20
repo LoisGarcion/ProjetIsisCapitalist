@@ -4,7 +4,13 @@
 .logo {
     text-align: center;
     border-radius: 50%;
-    background-color: rgb(182, 182, 182);
+}
+
+.image-logo{
+    width: 50%;
+    height: auto;
+    background-image: url("../assets/embleme_bois.png");
+    background-size: 200px;
 }
 
 header {
@@ -27,7 +33,9 @@ header {
     justify-content: space-around;
     text-align: left;
     align-items: center;
-    background-color: gray
+    background-color: gray;
+    clip-path: polygon(5% 0, 95% 0, 100% 20%, 100% 80%, 95% 100%, 5% 100%, 0% 80%, 0% 20%);
+    /* clip-path: polygon(0 5%, 5% 5%, 5% 0, 95% 0, 95% 5%, 100% 5%, 100% 95%, 95% 95%, 95% 100%, 5% 100%, 4% 95%, 0 95%); */
 }
 
 .leftmenu > button {
@@ -37,9 +45,6 @@ header {
     font-style: normal;
 }
 
-header>span {
-    background-color: white;
-}
 
 .header-content > h1{
     margin-bottom: 0;
