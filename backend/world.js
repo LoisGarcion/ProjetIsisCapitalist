@@ -139,7 +139,7 @@ module.exports = {
     "managers": [
         {
             "name": "Poppy",
-            "logo": "icones/poppy.jpg",
+            "logo": "icones/poppy.png",
             "seuil": 100,
             "idcible": 1,
             "ratio": 0,
@@ -150,7 +150,7 @@ module.exports = {
             "name": "Nasus",
             "logo": "icones/nasus.jpg",
             "seuil": 500,
-            "idcible": 1,
+            "idcible": 2,
             "ratio": 0,
             "typeratio": "gain",
             "unlocked": false

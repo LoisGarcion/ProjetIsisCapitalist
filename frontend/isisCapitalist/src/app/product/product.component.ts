@@ -17,7 +17,7 @@ import {MyProgressBarComponent, Orientation} from "../progressbar.component";
 })
 export class ProductComponent implements OnChanges {
   product: Product = new Product();
-  run: boolean = this.product.timeleft != 0;
+  run: boolean = this.product.timeleft != 0 || this.product.managerUnlocked;
   auto: boolean = this.product.managerUnlocked;
   initialValue: number = this.product.timeleft;
   isBrowser = signal(false);
@@ -92,9 +92,16 @@ export class ProductComponent implements OnChanges {
       this.product.timeleft -= elapsed;
       this.lastUpdate = Date.now();
       if(this.product.timeleft <= 0){
-        this.product.timeleft = 0;
-        this.notifyProduction.emit(this.product);
-        this.run = false;
+        if(this.product.managerUnlocked){
+          this.product.timeleft = this.product.vitesse + this.product.timeleft;
+          this.notifyProduction.emit(this.product);
+          this.auto = true;
+        }
+        else {
+          this.product.timeleft = 0;
+          this.notifyProduction.emit(this.product);
+          this.run = false;
+        }
       }
     }
   }
@@ -143,8 +150,6 @@ export class ProductComponent implements OnChanges {
 
   calcMaxNumberBuyable() {
     let numberOfItems = Math.floor(Math.log(1 + (this.worldMoney * (this.product.croissance - 1) / this.product.cout)) / Math.log(this.product.croissance));
-    console.log("nbItem: " + numberOfItems);
-    console.log("price: " + this.calcPriceNumberBuyable(numberOfItems));
     return Math.floor(numberOfItems);
   }
 

@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>{{data.popupPurpose}}</h2>
+@if(data.popupPurpose === 'managers'){
+  <mat-dialog-content>
+    @for(manager of data.world.managers; track manager.name){
+      @if(!manager.unlocked){
+        <div class="manager">
+          <img class="round" [src]="GET_SERV+manager.logo">
+          <div class="manager-info">
+            <h3>{{manager.name}}</h3>
+            <p>{{getProductNameById(manager.idcible)}}</p>
+            <p>{{manager.seuil}}</p>
+          </div>
+          <button [disabled]="data.world.money <= manager.seuil" [class.disabled] = "data.world.money <= manager.seuil" (click)="buyManager(manager)">Embaucher !</button>
+        </div>
+      }
+    }
+  </mat-dialog-content>
+}
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true">Fermer</button>
+</mat-dialog-actions>
