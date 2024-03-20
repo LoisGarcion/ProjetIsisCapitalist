@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
+
 .logo{
 text-align: center;
 border-radius: 50%;
@@ -7,20 +9,26 @@ background-color: rgb(182, 182, 182);
 header{ 
     display: flex;
     justify-content: space-around;
-    background-image: url("../assets/banner_zaun.png");
-    background-size: 1200px;
+    background-image: url("../assets/steampunk_bg.jpeg");
+    background-size: 50%;
+    clip:rect(0, 0, 500px, 500px);
     text-align: left;
     align-items: center;
+    border-bottom: 15px;
+    border: solid;
+    border-bottom-color: green;
 }
-
 header > span {
-    background-color: white ;
+    background-color: white;
 }
 
 header > p {
     background-color: white;
-    font-size:  15px;
+    font-family: "Holtwood One SC", serif;
+    font-weight: 400;
+    font-style: normal;
 }
+
 
 .container {  display: grid;
     grid-template-columns: 0.50fr 1.5fr 1fr;

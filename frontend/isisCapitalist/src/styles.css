@@ -1,13 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&family=Tillana:wght@400;500;600;700;800&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.round{
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.round {
     width: 100px;
     height: 100px;
     border-radius: 50%;
 }
-.disabled{
+
+.disabled {
     padding: 5px;
     background-color: #3b0000;
     border: 3px solid #ff0000;
@@ -20,7 +30,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     cursor: pointer;
 }
 
-button{
+.headerContainer {
+    background-color: #003109;
+}
+
+button {
 
     padding: 5px;
     background-color: #003109;
@@ -35,9 +49,14 @@ button{
 
 }
 
-button:hover{
+button:hover {
     background-color: #dddddd;
     border-radius: 0px;
     color: black;
 }
 
+p {
+    font-family: "Tillana", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
