@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { World, Palier, Product } from './world';
 import { WebserviceService } from './webservice.service';
@@ -27,6 +27,7 @@ export class AppComponent{
   username: string = localStorage.getItem('username')?.toString() ?? Math.floor(Math.random()*100000).toString();
   qtMulti: number = 1;
   managerBadge: number = 0;
+  @ViewChildren(ProductComponent) productsComponent: QueryList<ProductComponent> | undefined;
 
   setMatBadge(){
     this.managerBadge = this.world.managers.filter(m => m.seuil <= this.world.money && !m.unlocked).length;

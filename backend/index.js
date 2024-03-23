@@ -9,6 +9,7 @@ async function readUserWorld(user) {
         return JSON.parse(data);
     }
     catch(error) {
+        console.log("Il y a eu une erreur : " + error);
         return world;
     }
 }

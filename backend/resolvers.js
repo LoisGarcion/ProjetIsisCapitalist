@@ -1,7 +1,6 @@
 const {writeFile} = require("fs");
 
 function saveWorld(context)  {
-    console.log(context.user)
     writeFile("userworlds/" + context.user + "-world.json", JSON.stringify(context.world), err => {
         if (err) {
             console.error(err)
@@ -26,6 +25,9 @@ function calcQtProductionforElapseTime(product, elapseTime) { //RECALER LE TEMPS
         }
     }
     else{
+        if(product.timeleft === 0){
+            return 0
+        }
         if(remainingTime < 0){
             product.timeleft = (product.vitesse - (-remainingTime%product.vitesse))
             return (1 + (Math.floor(-remainingTime/product.vitesse)))
@@ -75,9 +77,10 @@ module.exports = {
                     throw new Error(`Vous n'avez pas assez d'argent pour acheter ${args.quantite} ${product.name}`)
                 }
                 product.quantite += args.quantite;
-                product.cout = product.cout * Math.pow(product.croissance, args.quantite)
-                context.world.money -= couttotal
-                saveWorld(context)
+                product.cout = product.cout * Math.pow(product.croissance, args.quantite);
+                context.world.money -= couttotal;
+                console.log("achete : " + args.quantite);
+                saveWorld(context);
             }
             return product
         },
@@ -101,8 +104,12 @@ module.exports = {
                 throw new Error(`Le manager avec le nom ${args.name} n'existe pas`)
             }
             if (manager) {
+                if(context.world.money < manager.cout){
+                    throw new Error(`Vous n'avez pas assez d'argent pour engager ${args.name}`)
+                }
                 manager.unlocked = true
                 product.managerUnlocked = true
+                context.world.money -= manager.cout
                 saveWorld(context)
             }
         },

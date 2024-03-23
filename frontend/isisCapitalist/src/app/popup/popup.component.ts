@@ -16,7 +16,7 @@ export interface DialogData {
   popupPurpose: string; //example : managers, upgrades, ...
 }
 
-@Component({
+@Component({ //TODO Y'a un probleme avec le product associé à un manager
   templateUrl: './popup.component.html',
   standalone: true,
   imports: [MatDialogTitle, MatDialogContent, MatButtonModule, MatDialogActions, MatDialogClose, ProductComponent],
