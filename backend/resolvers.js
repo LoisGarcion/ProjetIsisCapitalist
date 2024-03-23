@@ -1,7 +1,7 @@
 const {writeFile} = require("fs");
 
 function saveWorld(context)  {
-    writeFile("userworlds/" + context.user + "-world.json", JSON.stringify(context.world), err => {
+    writeFile("../userworlds/" + context.user + "-world.json", JSON.stringify(context.world), err => {
         if (err) {
             console.error(err)
             throw new Error(`Erreur d'écriture du monde coté serveur`)
@@ -79,7 +79,6 @@ module.exports = {
                 product.quantite += args.quantite;
                 product.cout = product.cout * Math.pow(product.croissance, args.quantite);
                 context.world.money -= couttotal;
-                console.log("achete : " + args.quantite);
                 saveWorld(context);
             }
             return product

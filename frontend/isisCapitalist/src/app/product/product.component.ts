@@ -111,13 +111,13 @@ export class ProductComponent implements OnChanges {
 
   startProduction() {
     if(!this.run){
+      this.initialValue = 0;
       this.product.timeleft = this.product.vitesse;
       this.run = true;
       this.lastUpdate = Date.now();
       this.service.lancerProduction(this.product).catch(reason =>
         console.log("erreur: " + reason)
       );
-      this.initialValue = 0;
     }
   }
 
