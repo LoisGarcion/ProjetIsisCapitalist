@@ -23,15 +23,19 @@ export interface DialogData {
   styleUrl: './popup.component.css'
 })
 export class PopupComponent {
+  unlocks: Palier[];
   constructor(public ref: MatDialogRef<PopupComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: WebserviceService) {
+    this.unlocks = this.getListUnlocks();
   }
 
   protected readonly GET_SERV = GET_SERV;
-  protected readonly Product = Product;
 
   @Output() notifyBuyManager: EventEmitter<Palier> = new EventEmitter<Palier>();
 
   getProductNameById(idcible: number) {
+    if(idcible === 0){
+      return "all";
+    }
     if(this.data.world.products !== undefined && idcible !== undefined) {
       const product = this.data.world.products.find(p => p.id === idcible);
       if (product !== undefined) {
@@ -44,5 +48,28 @@ export class PopupComponent {
   buyManager(manager: Palier) {
     this.notifyBuyManager.emit(manager);
     this.service.engagerManager(manager).catch(reason => console.log("erreur : " + reason));
+  }
+
+  getListUnlocks(){
+    console.log("Je récupère les unlocks")
+    let listUnlocks = [];
+    if(this.data.world.products !== undefined) {
+      for(let product of this.data.world.products) {
+        if(product.paliers !== null){
+          console.log(product.paliers)
+          for(let unlock of product.paliers) {
+            if (!unlock.unlocked) {
+              listUnlocks.push(unlock);
+            }
+          }
+        }
+      }
+    }
+    for(let palier of this.data.world.allunlocks){
+      if(!palier.unlocked){
+        listUnlocks.push(palier);
+      }
+    }
+    return listUnlocks;
   }
 }

@@ -61,6 +61,7 @@ module.exports = {
         getWorld(parent, args, context) {
             updateMoney(context)
             saveWorld(context)
+            console.log(context.world.products[0].pali)
             return context.world
         }
     },

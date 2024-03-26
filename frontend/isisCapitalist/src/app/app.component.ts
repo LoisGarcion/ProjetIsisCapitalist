@@ -84,6 +84,7 @@ export class AppComponent{
     }
   }
   openPopup(purpose: string, ) {
+    console.log(this.world.products);
     const dialogRef = this.dialog.open(PopupComponent, {
       data: {world: this.world, popupPurpose: purpose},
       width: '60%'

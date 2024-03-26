@@ -19,6 +19,22 @@
     }
   </mat-dialog-content>
 }
+@if(data.popupPurpose === 'unlocks'){
+  <mat-dialog-content>
+    @for(palier of this.unlocks; track palier.name){
+      <div class="unlock">
+        <img class="round" [src]="GET_SERV+palier.logo">
+        <div class="unlock-info">
+          <h3>{{palier.name}}</h3>
+          <p>{{getProductNameById(palier.idcible)}}</p>
+          <p>{{palier.seuil}}</p>
+          <p>{{palier.typeratio}}</p>
+          <p>x{{palier.ratio}}</p>
+        </div>
+      </div>
+    }
+  </mat-dialog-content>
+}
 <mat-dialog-actions>
   <button mat-button [mat-dialog-close]="true">Fermer</button>
 </mat-dialog-actions>

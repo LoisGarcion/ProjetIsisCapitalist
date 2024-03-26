@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Inject, Input, OnChanges, Output, PLATFORM_ID, signal} from '@angular/core';
-import {Product} from '../world';
+import {Palier, Product} from '../world';
 import {GET_SERV} from "../app.component";
 import {BigvaluePipe} from "../bigvalue.pipe";
 import {isPlatformBrowser} from "@angular/common";
@@ -175,6 +175,17 @@ export class ProductComponent implements OnChanges {
       this.service.acheterQtProduit(this.product,this.numberBuyable).then(result => console.log(result)).catch(reason =>
         console.log("erreur: " + reason)
       );
+    }
+  }
+
+  calcUpgrade(unlock: Palier) {
+    if(unlock.typeratio === "vitesse"){
+      this.product.vitesse = this.product.vitesse / unlock.ratio;
+      this.product.timeleft = this.product.timeleft / unlock.ratio;
+      this.initialValue = this.product.timeleft;
+    }
+    else if(unlock.typeratio === "gain"){
+      this.product.revenu = this.product.revenu * unlock.ratio;
     }
   }
 
