@@ -60,10 +60,10 @@ export class ProductComponent implements OnChanges {
   }
 
   @Output()
-  notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
+  notifyProduction: EventEmitter<[Product,number]> = new EventEmitter<[Product,number]>();
 
   @Output()
-  onBuy: EventEmitter<number> = new EventEmitter<number>();
+  onBuy: EventEmitter<[cost : number, product : Product, numberBuyed : number]> = new EventEmitter<[cost : number, product : Product, numberBuyed : number]>();
 
   formatMilliseconds(milliseconds: number): string { //TODO Il faut fix quelquechose ici, peut utilisé Date ou Time
 
@@ -96,28 +96,33 @@ export class ProductComponent implements OnChanges {
       this.lastUpdate = Date.now();
       if(this.product.timeleft <= 0){
         if(this.product.managerUnlocked){
-          this.product.timeleft = this.product.vitesse + this.product.timeleft;
-          this.notifyProduction.emit(this.product);
+          // + car timeleft est négatif
+          let nbProd = Math.floor(-this.product.timeleft / this.product.vitesse) + 1;
+
+          this.product.timeleft = this.product.vitesse + (this.product.timeleft%this.product.vitesse);
+          this.notifyProduction.emit([this.product,nbProd]);
           this.auto = true;
         }
         else {
           this.product.timeleft = 0;
-          this.notifyProduction.emit(this.product);
+          this.notifyProduction.emit([this.product, 1]);
           this.run = false;
         }
       }
     }
   }
 
-  startProduction() {
+  startProduction(notify: boolean = true) {
     if(!this.run){
       this.initialValue = 0;
       this.product.timeleft = this.product.vitesse;
       this.run = true;
       this.lastUpdate = Date.now();
-      this.service.lancerProduction(this.product).catch(reason =>
-        console.log("erreur: " + reason)
-      );
+      if(notify) {
+        this.service.lancerProduction(this.product).catch(reason =>
+          console.log("erreur: " + reason)
+        );
+      }
     }
   }
 
@@ -171,7 +176,7 @@ export class ProductComponent implements OnChanges {
       this.product.quantite += this.numberBuyable;
       this.worldMoney -= total;
       this.product.cout = this.product.cout * Math.pow(this.product.croissance, this.numberBuyable);
-      this.onBuy.emit(total);
+      this.onBuy.emit([total, this.product, this.numberBuyable]);
       this.service.acheterQtProduit(this.product,this.numberBuyable).then(result => console.log(result)).catch(reason =>
         console.log("erreur: " + reason)
       );
@@ -179,13 +184,22 @@ export class ProductComponent implements OnChanges {
   }
 
   calcUpgrade(unlock: Palier) {
+    console.log("Le type est : " + unlock.typeratio + " et le ratio est : " + unlock.ratio);
     if(unlock.typeratio === "vitesse"){
       this.product.vitesse = this.product.vitesse / unlock.ratio;
+      console.log("La vitesse est maintenant de : " + this.product.vitesse);
       this.product.timeleft = this.product.timeleft / unlock.ratio;
       this.initialValue = this.product.timeleft;
     }
     else if(unlock.typeratio === "gain"){
       this.product.revenu = this.product.revenu * unlock.ratio;
+      console.log("Le revenu est maintenant de : " + this.product.revenu);
+    }
+  }
+
+  notifyManagerBought(){
+    if(this.product.timeleft === 0){
+      this.startProduction(false);
     }
   }
 

@@ -56,12 +56,21 @@ function updateMoney(context) {
     context.world.score += total
 }
 
+function unlockEffect(palier, product) {
+    if(palier.typeratio === "vitesse"){
+        product.vitesse /= palier.ratio
+        product.timeleft /= palier.ratio
+    }
+    else if(palier.typeratio === "gain"){
+        product.revenu *= palier.ratio
+    }
+}
+
 module.exports = {
     Query: {
         getWorld(parent, args, context) {
             updateMoney(context)
             saveWorld(context)
-            console.log(context.world.products[0].pali)
             return context.world
         }
     },
@@ -80,6 +89,33 @@ module.exports = {
                 product.quantite += args.quantite;
                 product.cout = product.cout * Math.pow(product.croissance, args.quantite);
                 context.world.money -= couttotal;
+
+                //Unlock un produit
+                if(product.paliers.length > 0){
+                    let palier;
+                    for(palier of product.paliers.filter(p => p.unlocked === false && p.seuil <= product.quantite)){
+                        unlockEffect(palier, product);
+                    }
+                }
+
+                //Unlock tous les produits
+                if(context.world.allunlocks.length > 0){
+                    let palier;
+                    let unlockPalier = true;
+                    for(palier of context.world.allunlocks.filter(p => p.unlocked === false && p.seuil <= product.quantite)) {
+                        for(let p of context.world.products){
+                            if(palier.seuil > p.quantite){
+                                unlockPalier = false;
+                                break;
+                            }
+                        }
+                        if(unlockPalier){
+                            for(let prod of context.world.products){
+                                unlockEffect(palier, prod);
+                            }
+                        }
+                    }
+                }
                 saveWorld(context);
             }
             return product
@@ -109,7 +145,13 @@ module.exports = {
                 }
                 manager.unlocked = true
                 product.managerUnlocked = true
-                context.world.money -= manager.cout
+                console.log("J'ai : " + context.world.money +" gold");
+                context.world.money -= manager.seuil
+                console.log("Il me reste : " + context.world.money +" gold");
+                if(product.timeleft === 0){
+                    product.timeleft = product.vitesse;
+                    product.lastupdate = Date.now()
+                }
                 saveWorld(context)
             }
         },

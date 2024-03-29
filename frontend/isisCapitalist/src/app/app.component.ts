@@ -20,6 +20,7 @@ export const GET_SERV = "http://localhost:4000/";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent{
   title = 'isisCapitalist';
   server = GET_SERV;
@@ -56,13 +57,50 @@ export class AppComponent{
       }
     );
   }
-  onProductionDone(product: Product){
-    this.world.money = this.world.money + product.revenu * product.quantite;
+  onProductionDone(event : [Product, number]){
+    this.world.money = this.world.money + event[0].revenu * event[0].quantite * event[1];
     this.setMatBadge();
   }
 
-  onBuy(total: number){
-    this.world.money -= total;
+  onBuy(event: [cost: number, product: Product, numberBuyed: number]){
+    this.world.money -= event[0];
+
+    //Check si on a un unlock lié au produit
+    if(event[1].paliers.length > 0){
+      for(let palier of event[1].paliers.filter(p => p.seuil <= event[1].quantite && !p.unlocked)){
+        palier.unlocked = true;
+        this.snackBar.open("Vous avez débloqué l'unlock "+ palier.name +  " !", "", {
+          duration: 2000,
+          verticalPosition: 'top'
+        });
+        this.productsComponent?.find(p => p.product.id === event[1].id)?.calcUpgrade(palier);
+      }
+    }
+
+    //Check si on a des allunlocks
+    if(this.world.allunlocks.length > 0){
+    for(let palier of this.world.allunlocks.filter(p => p.seuil <= event[1].quantite && !p.unlocked)){
+        let unlockPallier = true;
+        for (let product of this.world.products) {
+          if (product.quantite < palier.seuil){
+            unlockPallier = false;
+            break;
+          }
+        }
+        if(unlockPallier){
+          palier.unlocked = true;
+          this.snackBar.open("Vous avez débloqué l'unlock " + palier.name + " !", "", {
+            duration: 2000,
+            verticalPosition: 'top'
+          });
+          if(this.productsComponent !== undefined) {
+            for (let product of this.productsComponent) {
+              product.calcUpgrade(palier);
+            }
+          }
+        }
+      }
+    }
     this.setMatBadge();
   }
 
@@ -101,6 +139,7 @@ export class AppComponent{
           duration: 2000,
           verticalPosition: 'top'
         });
+        this.productsComponent?.find(p => p.product.id === man.idcible)?.notifyManagerBought();
       }
       this.setMatBadge();
     });

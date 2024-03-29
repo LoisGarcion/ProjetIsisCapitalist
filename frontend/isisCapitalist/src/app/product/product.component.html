@@ -4,6 +4,10 @@
     {{product.quantite}}
   </div>
   <div class="rightbox">
+    <div class="rendement">
+      <p>{{product.quantite * product.revenu | bigvalue}}</p>
+      <img class="coin"src="../../assets/goldcoin.png" alt="">
+    </div>
     <div class="progressbardiv">
       <app-my-progress-bar [run]="run" [auto]="this.product.managerUnlocked"
                            [orientation]="Orientation.horizontal"
