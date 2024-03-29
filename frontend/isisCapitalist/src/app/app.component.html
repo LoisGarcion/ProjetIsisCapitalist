@@ -1,23 +1,21 @@
 <main>
-  
-  <div class="container">
-  <header>
 
-    <span class="logo">
-      <img class="image-logo"  [attr.src]="server+world.logo" /> </span>
-<div class="header-content">
-    <h1>{{world.name}}</h1>
-   <div> <span [innerHTML]="world.money | bigvalue"> </span> <img class="coin" src="../assets/goldcoin.png" alt="coin"> </div>
-    <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"/>
-    <button (click)="changeQt()">
-      <p>{{qtMulti != 0 ? "x" + qtMulti : "Max"}}</p>
-    </button>
-  </div>
-    
-  </header>
-    
+  <div class="container">
+    <header>
+      <span class="logo"><img [attr.src]="server+world.logo" /> </span>
+      <div class="header-content">
+        <h1>{{world.name}}</h1>
+        <div> <span [innerHTML]="world.money | bigvalue"> </span> <img class="coin" src="../assets/goldcoin.png" alt="coin"> </div>
+        <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"/>
+        <button (click)="changeQt()">
+          <p>{{qtMulti != 0 ? "x" + qtMulti : "Max"}}</p>
+        </button>
+      </div>
+
+    </header>
+
     <div class="leftmenu">
-      <button>
+      <button (click)="openPopup('unlocks')">
           Unlocks
       </button>
       <button>
@@ -26,7 +24,7 @@
       <button>
         Angel Upgrades
       </button>
-      <button (click)="openPopup('managers')">
+      <button [matBadge]="managerBadge" matBadgePosition="before" [matBadgeHidden]="managerBadge == 0" (click)="openPopup('managers')">
        Managers
       </button>
       <button>

@@ -1,8 +1,7 @@
 const {writeFile} = require("fs");
 
 function saveWorld(context)  {
-    console.log(context.user)
-    writeFile("userworlds/" + context.user + "-world.json", JSON.stringify(context.world), err => {
+    writeFile("../userworlds/" + context.user + "-world.json", JSON.stringify(context.world), err => {
         if (err) {
             console.error(err)
             throw new Error(`Erreur d'écriture du monde coté serveur`)
@@ -26,6 +25,9 @@ function calcQtProductionforElapseTime(product, elapseTime) { //RECALER LE TEMPS
         }
     }
     else{
+        if(product.timeleft === 0){
+            return 0
+        }
         if(remainingTime < 0){
             product.timeleft = (product.vitesse - (-remainingTime%product.vitesse))
             return (1 + (Math.floor(-remainingTime/product.vitesse)))
@@ -59,6 +61,7 @@ module.exports = {
         getWorld(parent, args, context) {
             updateMoney(context)
             saveWorld(context)
+            console.log(context.world.products[0].pali)
             return context.world
         }
     },
@@ -70,14 +73,14 @@ module.exports = {
                 throw new Error(`Le produit avec l'id ${args.id} n'existe pas`)
             }
             if (product) {
-                let couttotal = product.cout * (1 - Math.pow(product.croissance, args.quantite) / (- product.croissance))
+                let couttotal = product.cout * (1 - Math.pow(product.croissance, args.quantite)) / (1 - product.croissance)
                 if(context.world.money < couttotal){
                     throw new Error(`Vous n'avez pas assez d'argent pour acheter ${args.quantite} ${product.name}`)
                 }
                 product.quantite += args.quantite;
-                product.cout = product.cout * Math.pow(product.croissance, args.quantite)
-                context.world.money -= couttotal
-                saveWorld(context)
+                product.cout = product.cout * Math.pow(product.croissance, args.quantite);
+                context.world.money -= couttotal;
+                saveWorld(context);
             }
             return product
         },
@@ -101,8 +104,12 @@ module.exports = {
                 throw new Error(`Le manager avec le nom ${args.name} n'existe pas`)
             }
             if (manager) {
+                if(context.world.money < manager.cout){
+                    throw new Error(`Vous n'avez pas assez d'argent pour engager ${args.name}`)
+                }
                 manager.unlocked = true
                 product.managerUnlocked = true
+                context.world.money -= manager.cout
                 saveWorld(context)
             }
         },

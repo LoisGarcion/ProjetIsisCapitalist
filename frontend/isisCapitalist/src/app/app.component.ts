@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { World, Palier, Product } from './world';
 import { WebserviceService } from './webservice.service';
@@ -8,23 +8,30 @@ import {BigvaluePipe} from "./bigvalue.pipe";
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent, DialogData } from './popup/popup.component';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatButton} from "@angular/material/button";
+import {MatBadge} from "@angular/material/badge";
 
 export const GET_SERV = "http://localhost:4000/";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, ProductComponent, BigvaluePipe,MatSnackBarModule],
+  imports: [RouterOutlet, FormsModule, ProductComponent, BigvaluePipe, MatSnackBarModule, MatButton, MatBadge],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent{
   title = 'isisCapitalist';
   server = GET_SERV;
   world: World = new World();
   username: string = localStorage.getItem('username')?.toString() ?? Math.floor(Math.random()*100000).toString();
   qtMulti: number = 1;
+  managerBadge: number = 0;
+  @ViewChildren(ProductComponent) productsComponent: QueryList<ProductComponent> | undefined;
 
+  setMatBadge(){
+    this.managerBadge = this.world.managers.filter(m => m.seuil <= this.world.money && !m.unlocked).length;
+  }
 
   onUsernameChanged(){
     if(this.username == ""){
@@ -35,6 +42,7 @@ export class AppComponent {
       world => {
         console.log(world);
         this.world = world.data.getWorld;
+        window.location.reload();
       }
     );
   }
@@ -44,16 +52,18 @@ export class AppComponent {
       world => {
         console.log(world);
         this.world = world.data.getWorld;
+        this.setMatBadge();
       }
     );
   }
-
   onProductionDone(product: Product){
     this.world.money = this.world.money + product.revenu * product.quantite;
+    this.setMatBadge();
   }
 
   onBuy(total: number){
     this.world.money -= total;
+    this.setMatBadge();
   }
 
   changeQt(){
@@ -73,21 +83,26 @@ export class AppComponent {
         break;
     }
   }
-  openPopup(purpose: string, ){
+  openPopup(purpose: string, ) {
+    console.log(this.world.products);
     const dialogRef = this.dialog.open(PopupComponent, {
       data: {world: this.world, popupPurpose: purpose},
       width: '60%'
     });
-      dialogRef.componentInstance.notifyBuyManager.subscribe((manager: Palier) => {
-        const manIndex = this.world.managers.findIndex(m => m.name === manager.name);
-        let man = this.world.managers[manIndex];
-        const prodIndex = this.world.products.findIndex(p => p.id === man.idcible);
-        if (manIndex !== -1) {
-          this.world.managers[manIndex].unlocked = true;
-          this.world.money -= man.seuil
-          this.world.products[prodIndex].managerUnlocked = true;
-          this.snackBar.open("Le manager " + this.world.managers[manIndex].name + " a bien été acheté !", "", { duration : 2000 })
-        }
-      });
+    dialogRef.componentInstance.notifyBuyManager.subscribe((manager: Palier) => {
+      const manIndex = this.world.managers.findIndex(m => m.name === manager.name);
+      let man = this.world.managers[manIndex];
+      const prodIndex = this.world.products.findIndex(p => p.id === man.idcible);
+      if (manIndex !== -1) {
+        this.world.managers[manIndex].unlocked = true;
+        this.world.money -= man.seuil
+        this.world.products[prodIndex].managerUnlocked = true;
+        this.snackBar.open("Le manager " + this.world.managers[manIndex].name + " a bien été acheté !", "", {
+          duration: 2000,
+          verticalPosition: 'top'
+        });
+      }
+      this.setMatBadge();
+    });
   }
 }

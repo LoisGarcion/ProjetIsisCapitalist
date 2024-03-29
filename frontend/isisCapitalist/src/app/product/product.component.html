@@ -17,7 +17,8 @@
         Buy x{{numberBuyable}}:  {{priceNumberBuyable | bigvalue}}<img class="coin"src="../../assets/goldcoin.png" alt="">
       </button>
       <div class="timeleft">
-        {{product.timeleft != 0 ? formatMilliseconds(product.timeleft) : formatMilliseconds(product.vitesse)}}
+        {{product.timeleft}}
+        <!--{{product.timeleft != 0 ? formatMilliseconds(product.timeleft) : formatMilliseconds(product.vitesse)}}-->
       </div>
     </div>
   </div>

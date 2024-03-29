@@ -5,10 +5,11 @@ const fs = require('fs');
 
 async function readUserWorld(user) {
     try {
-        const data = await fs.promises.readFile("userworlds/" + user + "-world.json");
+        const data = await fs.promises.readFile("../userworlds/" + user + "-world.json");
         return JSON.parse(data);
     }
     catch(error) {
+        console.log("Il y a eu une erreur : " + error);
         return world;
     }
 }

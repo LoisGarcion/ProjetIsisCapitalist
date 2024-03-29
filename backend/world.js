@@ -19,9 +19,9 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
-                    "name": "Nom du premier palier",
+                    "name": "Execution de sbires mage",
                     "logo": "icones/premierpalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                     "seuil": 20,
                     "idcible": 1,
@@ -30,7 +30,7 @@ module.exports = {
                     "unlocked": false
                 },
                 {
-                    "name": "Nom deuxième palier",
+                    "name": "Anhilation de sbires mage",
                     "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                     "seuil": 75,
                     "idcible": 1,
@@ -39,7 +39,7 @@ module.exports = {
                     "unlocked": false
                 },
                 {
-                    "name": "Nom troisième palier",
+                    "name": "Génocide de sbires mage",
                     "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                     "seuil": 250,
                     "idcible": 1,
@@ -60,30 +60,30 @@ module.exports = {
         "quantite": 0,
         "timeleft": 0,
         "managerUnlocked": false,
-        "palliers": [
+        "paliers": [
             {
-                "name": "Nom du premier palier",
+                "name": "Execution de sbires cannon",
                 "logo": "icones/premierpalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                 "seuil": 20,
-                "idcible": 1,
+                "idcible": 2,
                 "ratio": 2,
                 "typeratio": "vitesse",
                 "unlocked": false
             },
             {
-                "name": "Nom deuxième palier",
+                "name": "Anhilation de sbires cannon",
                 "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                 "seuil": 75,
-                "idcible": 1,
+                "idcible": 2,
                 "ratio": 2,
                 "typeratio": "vitesse",
                 "unlocked": false
             },
             {
-                "name": "Nom troisième palier",
+                "name": "Génocide de sbires cannon",
                 "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                 "seuil": 250,
-                "idcible": 1,
+                "idcible": 2,
                 "ratio": 2,
                 "typeratio": "gain",
                 "unlocked": false
