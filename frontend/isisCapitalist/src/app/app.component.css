@@ -69,7 +69,8 @@ header {
     vertical-align: center;
     align-items: center;
 }
-/* todo faire marcher cte merde */
+
+
 .container {
     display: grid;
     grid-template-columns: 0.50fr 1.5fr 1fr;
@@ -136,4 +137,12 @@ img {
 .coin{
     width: 32px;
     height: 32px;
+  }
+
+  .productlist{
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 0.5fr 0.5fr;
+    gap: 0px 0px;
+   
   }

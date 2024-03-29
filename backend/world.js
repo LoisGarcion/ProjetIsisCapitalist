@@ -1,6 +1,6 @@
 module.exports = {
     "name": "Zaun Capitalist",
-    "logo": "icones/logomonde.png",
+    "logo": "icones/productslogo/logomonde.png",
     "money": 0,
     "score": 0,
     "totalangels": 0,
@@ -11,7 +11,7 @@ module.exports = {
         {
             "id": 1,
             "name": "Sbire mage",
-            "logo": "icones/sbiremage.jpg",
+            "logo": "icones/productslogo/sbiremage.jpg",
             "cout": 4,
             "croissance": 1.07,
             "revenu": 1,
@@ -52,7 +52,7 @@ module.exports = {
         {
         "id": 2,
         "name": "Sbire cannon",
-        "logo": "icones/sbirecanon.png",
+        "logo": "icones/productslogo/sbirecanon.png",
         "cout": 50,
         "croissance": 1.07,
         "revenu": 20,
@@ -89,8 +89,170 @@ module.exports = {
                 "unlocked": false
             }
             //...
-        ]},
-    ],
+        ]},{
+            "id": 3,
+            "name": "Gromp",
+            "logo": "icones/productslogo/gromp_Render.png",
+            "cout": 10000,
+            "croissance": 1.07,
+            "revenu": 5000,
+            "vitesse": 8000,
+            "quantite": 0,
+            "timeleft": 0,
+            "managerUnlocked": false,
+            "palliers": [
+                {
+                    "name": "Nom du premier palier",
+                    "logo": "icones/premierpalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                    "seuil": 20,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                {
+                    "name": "Nom deuxième palier",
+                    "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                    "seuil": 75,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                {
+                    "name": "Nom troisième palier",
+                    "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                    "seuil": 250,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "gain",
+                    "unlocked": false
+                }
+                //...
+            ]},{
+                "id": 5,
+                "name": "Sentinelle",
+                "logo": "icones/productslogo/Blue_Sentinel_Render.png",
+                "cout": 250000,
+                "croissance": 1.07,
+                "revenu": 10000,
+                "vitesse": 20000,
+                "quantite": 0,
+                "timeleft": 0,
+                "managerUnlocked": false,
+                "palliers": [
+                    {
+                        "name": "Nom du premier palier",
+                        "logo": "icones/premierpalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                        "seuil": 20,
+                        "idcible": 1,
+                        "ratio": 2,
+                        "typeratio": "vitesse",
+                        "unlocked": false
+                    },
+                    {
+                        "name": "Nom deuxième palier",
+                        "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                        "seuil": 75,
+                        "idcible": 1,
+                        "ratio": 2,
+                        "typeratio": "vitesse",
+                        "unlocked": false
+                    },
+                    {
+                        "name": "Nom troisième palier",
+                        "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                        "seuil": 250,
+                        "idcible": 1,
+                        "ratio": 2,
+                        "typeratio": "gain",
+                        "unlocked": false
+                    }
+                    //...
+                ]},
+                {
+                "id": 6,
+                "name": "Baron Nashor",
+                "logo": "icones/productslogo/Rift_Herald_Render.png",
+                "cout": 50000000,
+                "croissance": 1.07,
+                "revenu": 12000000,
+                "vitesse": 100000,
+                "quantite": 0,
+                "timeleft": 0,
+                "managerUnlocked": false,
+                "palliers": [
+                    {
+                        "name": "Nom du premier palier",
+                        "logo": "icones/premierpalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                        "seuil": 20,
+                        "idcible": 1,
+                        "ratio": 2,
+                        "typeratio": "vitesse",
+                        "unlocked": false
+                    },
+                    {
+                        "name": "Nom deuxième palier",
+                        "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                        "seuil": 75,
+                        "idcible": 1,
+                        "ratio": 2,
+                        "typeratio": "vitesse",
+                        "unlocked": false
+                    },
+                    {
+                        "name": "Nom troisième palier",
+                        "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                        "seuil": 250,
+                        "idcible": 1,
+                        "ratio": 2,
+                        "typeratio": "gain",
+                        "unlocked": false
+                    }
+                    //...
+                ]},
+                {
+                "id": 6,
+                "name": "Baron Nashor",
+                "logo": "icones/productslogo/Territorial_Baron_Nashor_Render.png",
+                "cout": 1000000,
+                "croissance": 1.07,
+                "revenu": 455000,
+                "vitesse": 50000,
+                "quantite": 0,
+                "timeleft": 0,
+                "managerUnlocked": false,
+                "palliers": [
+                    {
+                        "name": "Nom du premier palier",
+                        "logo": "icones/premierpalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                        "seuil": 20,
+                        "idcible": 1,
+                        "ratio": 2,
+                        "typeratio": "vitesse",
+                        "unlocked": false
+                    },
+                    {
+                        "name": "Nom deuxième palier",
+                        "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                        "seuil": 75,
+                        "idcible": 1,
+                        "ratio": 2,
+                        "typeratio": "vitesse",
+                        "unlocked": false
+                    },
+                    {
+                        "name": "Nom troisième palier",
+                        "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                        "seuil": 250,
+                        "idcible": 1,
+                        "ratio": 2,
+                        "typeratio": "gain",
+                        "unlocked": false
+                    }
+                    //...
+                ]},
+            ],
     "allunlocks": [
         {
             "name": "Coronasbirus",
