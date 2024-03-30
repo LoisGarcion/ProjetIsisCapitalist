@@ -23,14 +23,17 @@ export interface DialogData {
   styleUrl: './popup.component.css'
 })
 export class PopupComponent {
-  unlocks: Palier[];
+  unlocks: Palier[] | undefined;
   constructor(public ref: MatDialogRef<PopupComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: WebserviceService) {
-    this.unlocks = this.getListUnlocks();
+    if(data.popupPurpose === "unlocks"){
+      this.unlocks = this.getListUnlocks();
+    }
   }
 
   protected readonly GET_SERV = GET_SERV;
 
   @Output() notifyBuyManager: EventEmitter<Palier> = new EventEmitter<Palier>();
+  @Output() notifyBuyCashUpgrade: EventEmitter<Palier> = new EventEmitter<Palier>();
 
   getProductNameById(idcible: number) {
     if(idcible === 0){
@@ -51,7 +54,6 @@ export class PopupComponent {
   }
 
   getListUnlocks(){
-    console.log("Je récupère les unlocks")
     let listUnlocks = [];
     if(this.data.world.products !== undefined) {
       for(let product of this.data.world.products) {
@@ -71,5 +73,10 @@ export class PopupComponent {
       }
     }
     return listUnlocks;
+  }
+
+  buyUpgrade(upgrade: Palier) {
+    this.notifyBuyCashUpgrade.emit(upgrade);
+    this.service.acheterCashUpgrade(upgrade).catch(reason => console.log("erreur : " + reason));
   }
 }

@@ -41,10 +41,12 @@ export class ProductComponent implements OnChanges {
 
   @Input()
   set prod(value: Product) {
+    console.log(value);
     this.product = value;
-    this.run = this.product.timeleft != 0;
+    console.log("vitesse : " + this.product.vitesse);
     this.auto = this.product.managerUnlocked;
-    this.initialValue = this.product.timeleft;
+    this.initialValue = this.product.vitesse - this.product.timeleft;
+    this.run = this.product.timeleft != 0;
   }
 
   @Input()
@@ -98,7 +100,6 @@ export class ProductComponent implements OnChanges {
         if(this.product.managerUnlocked){
           // + car timeleft est négatif
           let nbProd = Math.floor(-this.product.timeleft / this.product.vitesse) + 1;
-
           this.product.timeleft = this.product.vitesse + (this.product.timeleft%this.product.vitesse);
           this.notifyProduction.emit([this.product,nbProd]);
           this.auto = true;
@@ -186,10 +187,10 @@ export class ProductComponent implements OnChanges {
   calcUpgrade(unlock: Palier) {
     console.log("Le type est : " + unlock.typeratio + " et le ratio est : " + unlock.ratio);
     if(unlock.typeratio === "vitesse"){
-      this.product.vitesse = this.product.vitesse / unlock.ratio;
+      this.product.vitesse = Math.round(this.product.vitesse / unlock.ratio);
       console.log("La vitesse est maintenant de : " + this.product.vitesse);
       this.product.timeleft = this.product.timeleft / unlock.ratio;
-      this.initialValue = this.product.timeleft;
+      this.initialValue = this.product.vitesse - this.product.timeleft;
     }
     else if(unlock.typeratio === "gain"){
       this.product.revenu = this.product.revenu * unlock.ratio;
@@ -209,4 +210,5 @@ export class ProductComponent implements OnChanges {
 
   protected readonly GET_SERV = GET_SERV;
   protected readonly Orientation = Orientation;
+  protected readonly String = String;
 }

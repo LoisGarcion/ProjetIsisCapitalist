@@ -58,7 +58,7 @@ function updateMoney(context) {
 
 function unlockEffect(palier, product) {
     if(palier.typeratio === "vitesse"){
-        product.vitesse /= palier.ratio
+        product.vitesse = Math.round(product.vitesse / palier.ratio)
         product.timeleft /= palier.ratio
     }
     else if(palier.typeratio === "gain"){
@@ -145,12 +145,37 @@ module.exports = {
                 }
                 manager.unlocked = true
                 product.managerUnlocked = true
-                console.log("J'ai : " + context.world.money +" gold");
                 context.world.money -= manager.seuil
-                console.log("Il me reste : " + context.world.money +" gold");
                 if(product.timeleft === 0){
                     product.timeleft = product.vitesse;
                     product.lastupdate = Date.now()
+                }
+                saveWorld(context)
+            }
+        },
+        acheterCashUpgrade(parent, args, context) {
+            updateMoney(context)
+            let upgrade = context.world.upgrades.find(p => p.name === args.name)
+            if(!upgrade){
+                throw new Error(`L'upgrade avec le nom ${args.name} n'existe pas`)
+            }
+            if (upgrade) {
+                if(context.world.money < upgrade.seuil){
+                    throw new Error(`Vous n'avez pas assez d'argent pour acheter l'upgrade ${args.name}`)
+                }
+                if(upgrade.unlocked){
+                    throw new Error(`L'upgrade ${args.name} est déjà achetée`)
+                }
+                upgrade.unlocked = true
+                context.world.money -= upgrade.seuil
+                if(upgrade.idcible === 0){
+                    for(let p of context.world.products){
+                        unlockEffect(upgrade, p)
+                    }
+                }
+                else{
+                    let product = context.world.products.find(p => p.id === upgrade.idcible)
+                    unlockEffect(upgrade, product)
                 }
                 saveWorld(context)
             }

@@ -18,7 +18,7 @@
       <button (click)="openPopup('unlocks')">
           Unlocks
       </button>
-      <button>
+      <button [matBadge]="cashUpgradeBadge" matBadgePosition="before" [matBadgeHidden]="cashUpgradeBadge == 0" (click)="openPopup('cashupgrades')">
         Cash Upgrades
       </button>
       <button>

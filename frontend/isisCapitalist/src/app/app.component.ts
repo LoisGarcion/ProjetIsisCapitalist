@@ -28,10 +28,12 @@ export class AppComponent{
   username: string = localStorage.getItem('username')?.toString() ?? Math.floor(Math.random()*100000).toString();
   qtMulti: number = 1;
   managerBadge: number = 0;
+  cashUpgradeBadge: number = 0;
   @ViewChildren(ProductComponent) productsComponent: QueryList<ProductComponent> | undefined;
 
   setMatBadge(){
     this.managerBadge = this.world.managers.filter(m => m.seuil <= this.world.money && !m.unlocked).length;
+    this.cashUpgradeBadge = this.world.upgrades.filter(u => u.seuil <= this.world.money && !u.unlocked).length;
   }
 
   onUsernameChanged(){
@@ -53,6 +55,7 @@ export class AppComponent{
       world => {
         console.log(world);
         this.world = world.data.getWorld;
+        console.log(this.world.money);
         this.setMatBadge();
       }
     );
@@ -140,6 +143,19 @@ export class AppComponent{
           verticalPosition: 'top'
         });
         this.productsComponent?.find(p => p.product.id === man.idcible)?.notifyManagerBought();
+      }
+      this.setMatBadge();
+    });
+    dialogRef.componentInstance.notifyBuyCashUpgrade.subscribe((upgrade: Palier) => {
+      const upIndex = this.world.upgrades.findIndex(u => u.name === upgrade.name);
+      if (upIndex !== -1) {
+        this.world.upgrades[upIndex].unlocked = true;
+        this.world.money -= upgrade.seuil
+        this.snackBar.open("L'upgrade " + this.world.upgrades[upIndex].name + " a bien été acheté !", "", {
+          duration: 2000,
+          verticalPosition: 'top'
+        });
+        this.productsComponent?.forEach(p => p.calcUpgrade(upgrade));
       }
       this.setMatBadge();
     });
