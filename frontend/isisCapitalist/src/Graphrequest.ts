@@ -94,3 +94,11 @@ export const ACHETER_QT_PRODUIT = gql`
     }
   }
 `
+
+export const ACHETER_CASH_UPGRADE = gql`
+  mutation acheterCashUpgrade($name: String!) {
+    acheterCashUpgrade(name: $name) {
+      name
+    }
+  }
+`
