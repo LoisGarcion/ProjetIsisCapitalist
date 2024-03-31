@@ -62,6 +62,7 @@ export class AppComponent{
   }
   onProductionDone(event : [Product, number]){
     this.world.money = this.world.money + event[0].revenu * event[0].quantite * event[1];
+    this.world.score += event[0].revenu * event[0].quantite * event[1];
     this.setMatBadge();
   }
 

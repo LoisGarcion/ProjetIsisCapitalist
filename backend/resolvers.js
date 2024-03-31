@@ -54,6 +54,8 @@ function updateMoney(context) {
     w.lastupdate = Date.now().toString()
     context.world.money += total
     context.world.score += total
+    context.world.totalangels = Math.floor(150 * Math.sqrt(context.world.score / 10^15))
+    console.log("Nb anges : " + context.world.totalangels)
 }
 
 function unlockEffect(palier, product) {
