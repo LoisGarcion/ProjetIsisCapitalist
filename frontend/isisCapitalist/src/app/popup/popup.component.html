@@ -60,6 +60,42 @@
     }
   </mat-dialog-content>
 }
+@if(data.popupPurpose === 'investors'){
+  <mat-dialog-content>
+      <div class="investor">
+        <p>Vous avez actuellement {{data.world.activeangels | bigvalue}} anges</p>
+        <p>Vous gagnez un bonus de {{data.world.angelbonus}}% par anges ! </p>
+        <p>Vous pouvez recommencer la partie pour gagner {{data.world.totalangels | bigvalue}} anges !</p>
+        <button [disabled]="data.world.totalangels === 0" [class.disabled] = "data.world.totalangels === 0" (click)="resetWorld()">Recommencer !</button>
+      </div>
+  </mat-dialog-content>
+}
+@if(data.popupPurpose === 'angelupgrades'){
+  <mat-dialog-content>
+    @if(data.world.angelupgrades.length === 0){
+      <p>Il n'y a plus d'upgrades de disponibles.</p>
+    }
+    <div class="nbAnge">Vous avez actuellement {{data.world.activeangels}}</div>
+    @for(upgrade of data.world.angelupgrades; track upgrade.name){
+      @if(!upgrade.unlocked){
+        <div class="unlock">
+          <img class="round" [src]="GET_SERV+upgrade.logo">
+          <div class="unlock-info">
+            <h3>{{upgrade.name}}</h3>
+            @if(upgrade.idcible === 0){
+              <p>Tous</p>
+            }
+            <p>{{getProductNameById(upgrade.idcible)}}</p>
+            <p>{{upgrade.seuil}}</p>
+            <p>{{upgrade.typeratio}}</p>
+            <p>x{{upgrade.ratio}}</p>
+          </div>
+          <button [disabled]="data.world.activeangels <= upgrade.seuil" [class.disabled] = "data.world.activeangels <= upgrade.seuil" (click)="buyAngelUpgrade(upgrade)">Acheter !</button>
+        </div>
+      }
+    }
+  </mat-dialog-content>
+}
 <mat-dialog-actions>
   <button mat-button [mat-dialog-close]="true">Fermer</button>
 </mat-dialog-actions>

@@ -28,6 +28,8 @@ export class ProductComponent implements OnChanges {
   canBuy = false;
   numberBuyable = 0;
   priceNumberBuyable = 0;
+  angels = 0;
+  angelBonus = 0;
 
   constructor(@Inject(PLATFORM_ID) private platformId: object, private service: WebserviceService) {
     this.isBrowser.set(isPlatformBrowser(platformId));
@@ -59,6 +61,16 @@ export class ProductComponent implements OnChanges {
   set money(value: number) {
     this.worldMoney = value;
     this.canBuyAndHowMany();
+  }
+
+  @Input()
+  set activeAngels(value: number) {
+    this.angels = value;
+  }
+
+  @Input()
+  set bonusAngels(value: number) {
+    this.angelBonus = value;
   }
 
   @Output()

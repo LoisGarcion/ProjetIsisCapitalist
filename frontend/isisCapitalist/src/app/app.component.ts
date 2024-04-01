@@ -29,11 +29,13 @@ export class AppComponent{
   qtMulti: number = 1;
   managerBadge: number = 0;
   cashUpgradeBadge: number = 0;
+  angelUpgradeBadge: number = 0;
   @ViewChildren(ProductComponent) productsComponent: QueryList<ProductComponent> | undefined;
 
   setMatBadge(){
     this.managerBadge = this.world.managers.filter(m => m.seuil <= this.world.money && !m.unlocked).length;
     this.cashUpgradeBadge = this.world.upgrades.filter(u => u.seuil <= this.world.money && !u.unlocked).length;
+    this.angelUpgradeBadge = this.world.angelupgrades.filter(u => u.seuil <= this.world.activeangels && !u.unlocked).length;
   }
 
   onUsernameChanged(){
@@ -61,8 +63,9 @@ export class AppComponent{
     );
   }
   onProductionDone(event : [Product, number]){
-    this.world.money = this.world.money + event[0].revenu * event[0].quantite * event[1];
-    this.world.score += event[0].revenu * event[0].quantite * event[1];
+    this.world.money = this.world.money + event[0].revenu * event[0].quantite * event[1] * (1 + this.world.activeangels * this.world.angelbonus / 100)
+    this.world.score +=  event[0].revenu * event[0].quantite * event[1] * (1 + this.world.activeangels * this.world.angelbonus / 100)
+    this.world.totalangels = Math.floor(150 * Math.sqrt(this.world.score / Math.pow(10, 15)))
     this.setMatBadge();
   }
 
@@ -126,7 +129,6 @@ export class AppComponent{
     }
   }
   openPopup(purpose: string, ) {
-    console.log(this.world.products);
     const dialogRef = this.dialog.open(PopupComponent, {
       data: {world: this.world, popupPurpose: purpose},
       width: '60%'
@@ -156,7 +158,30 @@ export class AppComponent{
           duration: 2000,
           verticalPosition: 'top'
         });
-        this.productsComponent?.forEach(p => p.calcUpgrade(upgrade));
+        if(upgrade.idcible === 0) {
+          this.productsComponent?.forEach(p => p.calcUpgrade(upgrade));
+        }
+        else {
+          this.productsComponent?.find(p => p.product.id === upgrade.idcible)?.calcUpgrade(upgrade);
+        }
+      }
+      this.setMatBadge();
+    });
+    dialogRef.componentInstance.notifyAchatAngelUpgrade.subscribe((upgrade: Palier) => {
+      const upIndex = this.world.angelupgrades.findIndex(u => u.name === upgrade.name);
+      if (upIndex !== -1) {
+        this.world.angelupgrades[upIndex].unlocked = true;
+        this.world.activeangels -= upgrade.seuil
+        this.snackBar.open("L'upgrade " + this.world.angelupgrades[upIndex].name + " a bien été acheté !", "", {
+          duration: 2000,
+          verticalPosition: 'top'
+        });
+        if(upgrade.idcible === 0) {
+          this.productsComponent?.forEach(p => p.calcUpgrade(upgrade));
+        }
+        else {
+          this.productsComponent?.find(p => p.product.id === upgrade.idcible)?.calcUpgrade(upgrade);
+        }
       }
       this.setMatBadge();
     });

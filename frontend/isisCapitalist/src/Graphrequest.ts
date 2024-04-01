@@ -102,3 +102,19 @@ export const ACHETER_CASH_UPGRADE = gql`
     }
   }
 `
+
+export const RESET_WORLD = gql`
+  mutation resetWorld {
+    resetWorld {
+      name
+    }
+  }
+`
+
+export const ACHETER_ANGEL_UPGRADE = gql`
+  mutation acheterAngelUpgrade($name: String!) {
+    acheterAngelUpgrade(name: $name) {
+      name
+    }
+  }
+`
