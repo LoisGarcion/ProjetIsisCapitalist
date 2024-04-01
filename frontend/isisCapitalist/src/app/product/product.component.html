@@ -4,6 +4,10 @@
     {{product.quantite}}
   </div>
   <div class="rightbox">
+    <div class="rendement">
+      <p [innerHTML]="product.quantite * product.revenu * (1 + angels * angelBonus / 100) | bigvalue"></p>
+      <img class="coin"src="../../assets/goldcoin.png" alt="">
+    </div>
     <div class="progressbardiv">
       <app-my-progress-bar [run]="run" [auto]="this.product.managerUnlocked"
                            [orientation]="Orientation.horizontal"
@@ -13,12 +17,12 @@
     </div>
     <div class="boxrightdown">
 
-      <button [disabled]="!canBuy" [class.disabled] = "!canBuy" (click)="buy()" > <!--le × est volontaire, c'est la version jolie de *, ou encore x-->
-        Buy ×{{numberBuyable}}:  {{priceNumberBuyable | bigvalue}}<img class="coin"src="../../assets/goldcoin.png" alt="">
+      <button [disabled]="!canBuy" [class.disabled] = "!canBuy" (click)="buy()">
+        <p [innerHTML]="'Buy ×'+numberBuyable+': ' + String(priceNumberBuyable | bigvalue)"></p>
+        <img class="coin"src="../../assets/goldcoin.png" alt="">
       </button>
       <div class="timeleft">
-        {{product.timeleft}}
-        <!--{{product.timeleft != 0 ? formatMilliseconds(product.timeleft) : formatMilliseconds(product.vitesse)}}-->
+        {{product.timeleft != 0 ? formatMilliseconds(product.timeleft) : formatMilliseconds(product.vitesse)}}
       </div>
     </div>
   </div>

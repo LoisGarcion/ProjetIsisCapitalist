@@ -10,6 +10,7 @@ import {Palier, Product, World} from "../world";
 import {GET_SERV} from "../app.component";
 import {ProductComponent} from "../product/product.component";
 import {WebserviceService} from "../webservice.service";
+import {BigvaluePipe} from "../bigvalue.pipe";
 
 export interface DialogData {
   world: World;
@@ -19,18 +20,22 @@ export interface DialogData {
 @Component({ //TODO Y'a un probleme avec le product associé à un manager
   templateUrl: './popup.component.html',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogContent, MatButtonModule, MatDialogActions, MatDialogClose, ProductComponent],
+  imports: [MatDialogTitle, MatDialogContent, MatButtonModule, MatDialogActions, MatDialogClose, ProductComponent, BigvaluePipe],
   styleUrl: './popup.component.css'
 })
 export class PopupComponent {
-  unlocks: Palier[];
+  unlocks: Palier[] | undefined;
   constructor(public ref: MatDialogRef<PopupComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: WebserviceService) {
-    this.unlocks = this.getListUnlocks();
+    if(data.popupPurpose === "unlocks"){
+      this.unlocks = this.getListUnlocks();
+    }
   }
 
   protected readonly GET_SERV = GET_SERV;
 
   @Output() notifyBuyManager: EventEmitter<Palier> = new EventEmitter<Palier>();
+  @Output() notifyBuyCashUpgrade: EventEmitter<Palier> = new EventEmitter<Palier>();
+  @Output() notifyAchatAngelUpgrade: EventEmitter<Palier> = new EventEmitter<Palier>();
 
   getProductNameById(idcible: number) {
     if(idcible === 0){
@@ -51,7 +56,6 @@ export class PopupComponent {
   }
 
   getListUnlocks(){
-    console.log("Je récupère les unlocks")
     let listUnlocks = [];
     if(this.data.world.products !== undefined) {
       for(let product of this.data.world.products) {
@@ -71,5 +75,19 @@ export class PopupComponent {
       }
     }
     return listUnlocks;
+  }
+
+  buyUpgrade(upgrade: Palier) {
+    this.notifyBuyCashUpgrade.emit(upgrade);
+    this.service.acheterCashUpgrade(upgrade).catch(reason => console.log("erreur : " + reason));
+  }
+
+  buyAngelUpgrade(upgrade: Palier) {
+    this.notifyAchatAngelUpgrade.emit(upgrade);
+    this.service.acheterAngelUpgrade(upgrade).catch(reason => console.log("erreur : " + reason));
+  }
+
+  resetWorld(){
+    this.service.resetWorld().catch(reason => console.log("erreur : " + reason)).then(() => window.location.reload());
   }
 }

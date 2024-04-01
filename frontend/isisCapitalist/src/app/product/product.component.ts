@@ -28,6 +28,8 @@ export class ProductComponent implements OnChanges {
   canBuy = false;
   numberBuyable = 0;
   priceNumberBuyable = 0;
+  angels = 0;
+  angelBonus = 0;
 
   constructor(@Inject(PLATFORM_ID) private platformId: object, private service: WebserviceService) {
     this.isBrowser.set(isPlatformBrowser(platformId));
@@ -41,10 +43,12 @@ export class ProductComponent implements OnChanges {
 
   @Input()
   set prod(value: Product) {
+    console.log(value);
     this.product = value;
-    this.run = this.product.timeleft != 0;
+    console.log("vitesse : " + this.product.vitesse);
     this.auto = this.product.managerUnlocked;
-    this.initialValue = this.product.timeleft;
+    this.initialValue = this.product.vitesse - this.product.timeleft;
+    this.run = this.product.timeleft != 0;
   }
 
   @Input()
@@ -59,11 +63,21 @@ export class ProductComponent implements OnChanges {
     this.canBuyAndHowMany();
   }
 
-  @Output()
-  notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
+  @Input()
+  set activeAngels(value: number) {
+    this.angels = value;
+  }
+
+  @Input()
+  set bonusAngels(value: number) {
+    this.angelBonus = value;
+  }
 
   @Output()
-  onBuy: EventEmitter<number> = new EventEmitter<number>();
+  notifyProduction: EventEmitter<[Product,number]> = new EventEmitter<[Product,number]>();
+
+  @Output()
+  onBuy: EventEmitter<[cost : number, product : Product, numberBuyed : number]> = new EventEmitter<[cost : number, product : Product, numberBuyed : number]>();
 
   formatMilliseconds(milliseconds: number): string { //TODO Il faut fix quelquechose ici, peut utilisé Date ou Time
 
@@ -96,28 +110,32 @@ export class ProductComponent implements OnChanges {
       this.lastUpdate = Date.now();
       if(this.product.timeleft <= 0){
         if(this.product.managerUnlocked){
-          this.product.timeleft = this.product.vitesse + this.product.timeleft;
-          this.notifyProduction.emit(this.product);
+          // + car timeleft est négatif
+          let nbProd = Math.floor(-this.product.timeleft / this.product.vitesse) + 1;
+          this.product.timeleft = this.product.vitesse + (this.product.timeleft%this.product.vitesse);
+          this.notifyProduction.emit([this.product,nbProd]);
           this.auto = true;
         }
         else {
           this.product.timeleft = 0;
-          this.notifyProduction.emit(this.product);
+          this.notifyProduction.emit([this.product, 1]);
           this.run = false;
         }
       }
     }
   }
 
-  startProduction() {
+  startProduction(notify: boolean = true) {
     if(!this.run){
       this.initialValue = 0;
       this.product.timeleft = this.product.vitesse;
       this.run = true;
       this.lastUpdate = Date.now();
-      this.service.lancerProduction(this.product).catch(reason =>
-        console.log("erreur: " + reason)
-      );
+      if(notify) {
+        this.service.lancerProduction(this.product).catch(reason =>
+          console.log("erreur: " + reason)
+        );
+      }
     }
   }
 
@@ -171,7 +189,7 @@ export class ProductComponent implements OnChanges {
       this.product.quantite += this.numberBuyable;
       this.worldMoney -= total;
       this.product.cout = this.product.cout * Math.pow(this.product.croissance, this.numberBuyable);
-      this.onBuy.emit(total);
+      this.onBuy.emit([total, this.product, this.numberBuyable]);
       this.service.acheterQtProduit(this.product,this.numberBuyable).then(result => console.log(result)).catch(reason =>
         console.log("erreur: " + reason)
       );
@@ -179,13 +197,22 @@ export class ProductComponent implements OnChanges {
   }
 
   calcUpgrade(unlock: Palier) {
+    console.log("Le type est : " + unlock.typeratio + " et le ratio est : " + unlock.ratio);
     if(unlock.typeratio === "vitesse"){
-      this.product.vitesse = this.product.vitesse / unlock.ratio;
+      this.product.vitesse = Math.round(this.product.vitesse / unlock.ratio);
+      console.log("La vitesse est maintenant de : " + this.product.vitesse);
       this.product.timeleft = this.product.timeleft / unlock.ratio;
-      this.initialValue = this.product.timeleft;
+      this.initialValue = this.product.vitesse - this.product.timeleft;
     }
     else if(unlock.typeratio === "gain"){
       this.product.revenu = this.product.revenu * unlock.ratio;
+      console.log("Le revenu est maintenant de : " + this.product.revenu);
+    }
+  }
+
+  notifyManagerBought(){
+    if(this.product.timeleft === 0){
+      this.startProduction(false);
     }
   }
 
@@ -195,4 +222,5 @@ export class ProductComponent implements OnChanges {
 
   protected readonly GET_SERV = GET_SERV;
   protected readonly Orientation = Orientation;
+  protected readonly String = String;
 }

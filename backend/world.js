@@ -100,12 +100,12 @@ module.exports = {
             "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Nom du premier palier",
                     "logo": "icones/premierpalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                     "seuil": 20,
-                    "idcible": 1,
+                    "idcible": 3,
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
@@ -114,7 +114,7 @@ module.exports = {
                     "name": "Nom deuxième palier",
                     "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                     "seuil": 75,
-                    "idcible": 1,
+                    "idcible": 3,
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
@@ -123,14 +123,14 @@ module.exports = {
                     "name": "Nom troisième palier",
                     "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                     "seuil": 250,
-                    "idcible": 1,
+                    "idcible": 3,
                     "ratio": 2,
                     "typeratio": "gain",
                     "unlocked": false
                 }
                 //...
             ]},{
-                "id": 5,
+                "id": 4,
                 "name": "Sentinelle",
                 "logo": "icones/productslogo/Blue_Sentinel_Render.png",
                 "cout": 250000,
@@ -140,12 +140,12 @@ module.exports = {
                 "quantite": 0,
                 "timeleft": 0,
                 "managerUnlocked": false,
-                "palliers": [
+                "paliers": [
                     {
                         "name": "Nom du premier palier",
                         "logo": "icones/premierpalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                         "seuil": 20,
-                        "idcible": 1,
+                        "idcible": 4,
                         "ratio": 2,
                         "typeratio": "vitesse",
                         "unlocked": false
@@ -154,7 +154,7 @@ module.exports = {
                         "name": "Nom deuxième palier",
                         "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                         "seuil": 75,
-                        "idcible": 1,
+                        "idcible": 4,
                         "ratio": 2,
                         "typeratio": "vitesse",
                         "unlocked": false
@@ -163,7 +163,7 @@ module.exports = {
                         "name": "Nom troisième palier",
                         "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                         "seuil": 250,
-                        "idcible": 1,
+                        "idcible": 4,
                         "ratio": 2,
                         "typeratio": "gain",
                         "unlocked": false
@@ -171,8 +171,8 @@ module.exports = {
                     //...
                 ]},
                 {
-                "id": 6,
-                "name": "Baron Nashor",
+                "id": 5,
+                "name": "Hérault de la faille",
                 "logo": "icones/productslogo/Rift_Herald_Render.png",
                 "cout": 50000000,
                 "croissance": 1.07,
@@ -181,12 +181,12 @@ module.exports = {
                 "quantite": 0,
                 "timeleft": 0,
                 "managerUnlocked": false,
-                "palliers": [
+                "paliers": [
                     {
                         "name": "Nom du premier palier",
                         "logo": "icones/premierpalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                         "seuil": 20,
-                        "idcible": 1,
+                        "idcible": 5,
                         "ratio": 2,
                         "typeratio": "vitesse",
                         "unlocked": false
@@ -195,7 +195,7 @@ module.exports = {
                         "name": "Nom deuxième palier",
                         "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                         "seuil": 75,
-                        "idcible": 1,
+                        "idcible": 5,
                         "ratio": 2,
                         "typeratio": "vitesse",
                         "unlocked": false
@@ -204,7 +204,7 @@ module.exports = {
                         "name": "Nom troisième palier",
                         "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                         "seuil": 250,
-                        "idcible": 1,
+                        "idcible": 5,
                         "ratio": 2,
                         "typeratio": "gain",
                         "unlocked": false
@@ -222,12 +222,12 @@ module.exports = {
                 "quantite": 0,
                 "timeleft": 0,
                 "managerUnlocked": false,
-                "palliers": [
+                "paliers": [
                     {
                         "name": "Nom du premier palier",
                         "logo": "icones/premierpalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                         "seuil": 20,
-                        "idcible": 1,
+                        "idcible": 6,
                         "ratio": 2,
                         "typeratio": "vitesse",
                         "unlocked": false
@@ -236,7 +236,7 @@ module.exports = {
                         "name": "Nom deuxième palier",
                         "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                         "seuil": 75,
-                        "idcible": 1,
+                        "idcible": 6,
                         "ratio": 2,
                         "typeratio": "vitesse",
                         "unlocked": false
@@ -245,7 +245,7 @@ module.exports = {
                         "name": "Nom troisième palier",
                         "logo": "icones/deuxiemepalier.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                         "seuil": 250,
-                        "idcible": 1,
+                        "idcible": 6,
                         "ratio": 2,
                         "typeratio": "gain",
                         "unlocked": false

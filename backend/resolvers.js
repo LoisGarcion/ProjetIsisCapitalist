@@ -54,6 +54,20 @@ function updateMoney(context) {
     w.lastupdate = Date.now().toString()
     context.world.money += total
     context.world.score += total
+    context.world.totalangels = Math.floor(150 * Math.sqrt(context.world.score / Math.pow(10, 15)))
+}
+
+function unlockEffect(palier, product, world){
+    if(palier.typeratio === "vitesse"){
+        product.vitesse = Math.round(product.vitesse / palier.ratio)
+        product.timeleft /= palier.ratio
+    }
+    else if(palier.typeratio === "gain"){
+        product.revenu *= palier.ratio
+    }
+    else if(palier.typeratio === "ange"){
+        world.angelbonus += palier.ratio
+    }
 }
 
 module.exports = {
@@ -61,7 +75,6 @@ module.exports = {
         getWorld(parent, args, context) {
             updateMoney(context)
             saveWorld(context)
-            console.log(context.world.products[0].pali)
             return context.world
         }
     },
@@ -80,6 +93,40 @@ module.exports = {
                 product.quantite += args.quantite;
                 product.cout = product.cout * Math.pow(product.croissance, args.quantite);
                 context.world.money -= couttotal;
+
+                //Unlock un produit
+                if(product.paliers.length > 0){
+                    let palier;
+                    for(palier of product.paliers.filter(p => p.unlocked === false && p.seuil <= product.quantite)){
+                        palier.unlocked = true;
+                        unlockEffect(palier, product, context.world);
+                    }
+                }
+
+                //Unlock tous les produits
+                if(context.world.allunlocks.length > 0){
+                    let palier;
+                    let unlockPalier = true;
+                    for(palier of context.world.allunlocks.filter(p => p.unlocked === false && p.seuil <= product.quantite)) {
+                        for(let p of context.world.products){
+                            if(palier.seuil > p.quantite){
+                                unlockPalier = false;
+                                break;
+                            }
+                        }
+                        if(unlockPalier){
+                            palier.unlocked = true;
+                            if(palier.typeratio === "ange"){
+                                unlockEffect(palier, null, context.world);
+                            }
+                            else {
+                                for (let prod of context.world.products) {
+                                    unlockEffect(palier, prod, context.world);
+                                }
+                            }
+                        }
+                    }
+                }
                 saveWorld(context);
             }
             return product
@@ -109,9 +156,81 @@ module.exports = {
                 }
                 manager.unlocked = true
                 product.managerUnlocked = true
-                context.world.money -= manager.cout
+                context.world.money -= manager.seuil
+                if(product.timeleft === 0){
+                    product.timeleft = product.vitesse;
+                    product.lastupdate = Date.now()
+                }
                 saveWorld(context)
             }
         },
+        acheterCashUpgrade(parent, args, context) {
+            updateMoney(context)
+            let upgrade = context.world.upgrades.find(p => p.name === args.name)
+            if(!upgrade){
+                throw new Error(`L'upgrade avec le nom ${args.name} n'existe pas`)
+            }
+            if (upgrade) {
+                if(context.world.money < upgrade.seuil){
+                    throw new Error(`Vous n'avez pas assez d'argent pour acheter l'upgrade ${args.name}`)
+                }
+                if(upgrade.unlocked){
+                    throw new Error(`L'upgrade ${args.name} est déjà achetée`)
+                }
+                upgrade.unlocked = true
+                context.world.money -= upgrade.seuil
+                if(upgrade.idcible === 0 && upgrade.typeratio !== "ange"){
+                    for(let p of context.world.products){
+                        unlockEffect(upgrade, p,context.world)
+                    }
+                }
+                else if(upgrade.idcible === 0 && upgrade.typeratio === "ange"){
+                    unlockEffect(upgrade, null,context.world)
+                }
+                else{
+                    let product = context.world.products.find(p => p.id === upgrade.idcible)
+                    unlockEffect(upgrade, product,context.world)
+                }
+                saveWorld(context)
+            }
+        },
+        resetWorld(parent, args, context) {
+            let angels = context.world.totalangels + context.world.activeangels
+            const world = require("./world")
+            context.world = Object.assign({}, world)
+            context.world.activeangels = angels
+            saveWorld(context)
+            return context.world
+        },
+        acheterAngelUpgrade(parent, args, context) {
+            updateMoney(context)
+            let upgrade = context.world.angelupgrades.find(p => p.name === args.name)
+            if(!upgrade){
+                throw new Error(`L'upgrade avec le nom ${args.name} n'existe pas`)
+            }
+            if (upgrade) {
+                if(context.world.activeangels < upgrade.seuil){
+                    throw new Error(`Vous n'avez pas assez d'argent pour acheter l'upgrade ${args.name}`)
+                }
+                if(upgrade.unlocked){
+                    throw new Error(`L'upgrade ${args.name} est déjà achetée`)
+                }
+                upgrade.unlocked = true
+                context.world.activeangels -= upgrade.seuil
+                if(upgrade.idcible === 0 && upgrade.typeratio !== "ange"){
+                    for(let p of context.world.products){
+                        unlockEffect(upgrade, p,context.world)
+                    }
+                }
+                else if(upgrade.idcible === 0 && upgrade.typeratio === "ange"){
+                    unlockEffect(upgrade, null,context.world)
+                }
+                else{
+                    let product = context.world.products.find(p => p.id === upgrade.idcible)
+                    unlockEffect(upgrade, product,context.world)
+                }
+                saveWorld(context)
+            }
+        }
     }
 };

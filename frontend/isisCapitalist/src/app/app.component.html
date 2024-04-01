@@ -18,22 +18,22 @@
       <button (click)="openPopup('unlocks')">
           Unlocks
       </button>
-      <button>
+      <button [matBadge]="cashUpgradeBadge" matBadgePosition="before" [matBadgeHidden]="cashUpgradeBadge == 0" (click)="openPopup('cashupgrades')">
         Cash Upgrades
       </button>
-      <button>
+      <button [matBadge]="angelUpgradeBadge" matBadgePosition="before" [matBadgeHidden]="angelUpgradeBadge == 0" (click)="openPopup('angelupgrades')">
         Angel Upgrades
       </button>
       <button [matBadge]="managerBadge" matBadgePosition="before" [matBadgeHidden]="managerBadge == 0" (click)="openPopup('managers')">
        Managers
       </button>
-      <button>
+      <button (click)="openPopup('investors')">
        Investors
       </button>
     </div>
     <div class="productlist">
       @for(product of world.products; track product.id){
-        <app-product [prod]="product" (notifyProduction)="onProductionDone($event)" (onBuy)="onBuy($event)" [qtMulti]="this.qtMulti" [money]="this.world.money"/>
+        <app-product [prod]="product" [qtMulti]="this.qtMulti" [money]="this.world.money" [activeAngels]="this.world.activeangels" [bonusAngels]="this.world.angelbonus" (notifyProduction)="onProductionDone($event)" (onBuy)="onBuy($event)" />
       }
     </div>
   </div>

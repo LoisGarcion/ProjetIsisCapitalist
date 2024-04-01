@@ -94,3 +94,27 @@ export const ACHETER_QT_PRODUIT = gql`
     }
   }
 `
+
+export const ACHETER_CASH_UPGRADE = gql`
+  mutation acheterCashUpgrade($name: String!) {
+    acheterCashUpgrade(name: $name) {
+      name
+    }
+  }
+`
+
+export const RESET_WORLD = gql`
+  mutation resetWorld {
+    resetWorld {
+      name
+    }
+  }
+`
+
+export const ACHETER_ANGEL_UPGRADE = gql`
+  mutation acheterAngelUpgrade($name: String!) {
+    acheterAngelUpgrade(name: $name) {
+      name
+    }
+  }
+`
