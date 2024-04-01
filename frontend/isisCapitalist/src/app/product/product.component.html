@@ -13,8 +13,8 @@
     </div>
     <div class="boxrightdown">
 
-      <button [disabled]="!canBuy" [class.disabled] = "!canBuy" (click)="buy()" >
-        Buy x{{numberBuyable}}:  {{priceNumberBuyable | bigvalue}}<img class="coin"src="../../assets/goldcoin.png" alt="">
+      <button [disabled]="!canBuy" [class.disabled] = "!canBuy" (click)="buy()" > <!--le × est volontaire, c'est la version jolie de *, ou encore x-->
+        Buy ×{{numberBuyable}}:  {{priceNumberBuyable | bigvalue}}<img class="coin"src="../../assets/goldcoin.png" alt="">
       </button>
       <div class="timeleft">
         {{product.timeleft}}
