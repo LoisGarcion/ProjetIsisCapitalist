@@ -79,7 +79,7 @@ export class ProductComponent implements OnChanges {
   @Output()
   onBuy: EventEmitter<[cost : number, product : Product, numberBuyed : number]> = new EventEmitter<[cost : number, product : Product, numberBuyed : number]>();
 
-  formatMilliseconds(milliseconds: number): string { //TODO Il faut fix quelquechose ici, peut utilisé Date ou Time
+  formatMilliseconds(milliseconds: number): string {
 
     // Convert milliseconds to seconds
     let totalSeconds = Math.floor(milliseconds / 1000);
