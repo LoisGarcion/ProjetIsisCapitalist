@@ -56,3 +56,9 @@
 
 }
 
+button{
+  align-items: middle;
+  p{
+    margin: 0px;
+  }
+}

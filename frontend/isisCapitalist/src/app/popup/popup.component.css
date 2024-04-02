@@ -11,17 +11,9 @@
 
 }
 
-.manager > button{
-  display: flex;
-  flex-direction: column;
 
-}
 
-p{
-  justify-content: bottom;
-}
-
-.dialog{
+.dialog2{
   /* background-color: */
   background-image: url("../../assets/background_managers.jpg");
   background-size: 100%;
