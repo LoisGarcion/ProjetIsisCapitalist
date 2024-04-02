@@ -80,7 +80,7 @@ export class AppComponent{
           duration: 2000,
           verticalPosition: 'top'
         });
-        this.productsComponent?.find(p => p.product.id === event[1].id)?.calcUpgrade(palier);
+        this.productsComponent?.find(p => p.product.id === palier.idcible)?.calcUpgrade(palier);
       }
     }
 

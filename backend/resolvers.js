@@ -9,7 +9,7 @@ function saveWorld(context)  {
     })
 }
 
-function calcQtProductionforElapseTime(product, elapseTime) { //RECALER LE TEMPS DES LE DEPART A 0
+function calcQtProductionforElapseTime(product, elapseTime) {
     let remainingTime = product.timeleft - elapseTime
     if(!product.managerUnlocked){
         if(product.timeleft !== 0 && remainingTime <= 0){
@@ -99,7 +99,7 @@ module.exports = {
                     let palier;
                     for(palier of product.paliers.filter(p => p.unlocked === false && p.seuil <= product.quantite)){
                         palier.unlocked = true;
-                        unlockEffect(palier, product, context.world);
+                        unlockEffect(palier, context.world.products.find(p => p.id === palier.idcible), context.world);
                     }
                 }
 
