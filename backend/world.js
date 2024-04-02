@@ -11,7 +11,7 @@ module.exports = {
         {
             "id": 1,
             "name": "Sbire mage",
-            "logo": "icones/productslogo/sbiremage.jpg",
+            "logo": "icones/productslogo/sbiremage.webp",
             "cout": 4,
             "croissance": 1.07,
             "revenu": 1,
@@ -22,7 +22,7 @@ module.exports = {
             "paliers": [
                 {
                     "name": "Execution de sbires mage",
-                    "logo": "icones/productslogo/sbiremage.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                    "logo": "icones/productslogo/sbiremage.webp", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                     "seuil": 20,
                     "idcible": 1,
                     "ratio": 2,
@@ -31,7 +31,7 @@ module.exports = {
                 },
                 {
                     "name": "Anhilation de sbires mage",
-                    "logo": "icones/productslogo/sbiremage.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                    "logo": "icones/productslogo/sbiremage.webp", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                     "seuil": 50,
                     "idcible": 1,
                     "ratio": 2,
@@ -40,7 +40,7 @@ module.exports = {
                 },
                 {
                     "name": "Science du sbire mage",
-                    "logo": "icones/productslogo/sbiremage.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                    "logo": "icones/productslogo/sbiremage.webp", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                     "seuil": 100,
                     "idcible": 1,
                     "ratio": 2,
@@ -49,7 +49,7 @@ module.exports = {
                 },
                 {
                     "name": "Technique de destruction avancée",
-                    "logo": "icones/productslogo/sbiremage.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                    "logo": "icones/productslogo/sbiremage.webp", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                     "seuil": 300,
                     "idcible": 1,
                     "ratio": 4,
@@ -58,7 +58,7 @@ module.exports = {
                 },
                 {
                     "name": "Proxy des waves",
-                    "logo": "icones/productslogo/sbiremage.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                    "logo": "icones/productslogo/sbiremage.webp", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                     "seuil": 400,
                     "idcible": 1,
                     "ratio": 4,
@@ -67,7 +67,7 @@ module.exports = {
                 },
                 {
                     "name": "Acide à sbire",
-                    "logo": "icones/productslogo/sbiremage.jpg", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                    "logo": "icones/productslogo/sbiremage.webp", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                     "seuil": 500,
                     "idcible": 1,
                     "ratio": 4,
@@ -80,7 +80,7 @@ module.exports = {
         {
         "id": 2,
         "name": "Sbire cannon",
-        "logo": "icones/productslogo/sbirecanon.png",
+        "logo": "icones/productslogo/sbirecannon.webp",
         "cout": 60,
         "croissance": 1.15,
         "revenu": 60,
@@ -91,7 +91,7 @@ module.exports = {
         "paliers": [
             {
                 "name": "Execution de sbires cannon",
-                "logo": "icones/productslogo/sbirecanon.png", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                "logo": "icones/productslogo/sbirecannon.webp", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                 "seuil": 20,
                 "idcible": 2,
                 "ratio": 2,
@@ -100,7 +100,7 @@ module.exports = {
             },
             {
                 "name": "Anhilation de sbires cannon",
-                "logo": "icones/productslogo/sbirecanon.png", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                "logo": "icones/productslogo/sbirecannon.webp", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                 "seuil": 50,
                 "idcible": 2,
                 "ratio": 2,
@@ -109,7 +109,7 @@ module.exports = {
             },
             {
                 "name": "Herse anti sbire cannon",
-                "logo": "icones/productslogo/sbirecanon.png", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                "logo": "icones/productslogo/sbirecannon.webp", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                 "seuil": 100,
                 "idcible": 2,
                 "ratio": 2,
@@ -118,7 +118,7 @@ module.exports = {
             },
             {
                 "name": "Bouclier anti cannon",
-                "logo": "icones/productslogo/sbirecanon.png", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                "logo": "icones/productslogo/sbirecannon.webp", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                 "seuil": 150,
                 "idcible": 2,
                 "ratio": 2,
@@ -127,7 +127,7 @@ module.exports = {
             },
             {
                 "name": "Desctruction des mécanismes",
-                "logo": "icones/productslogo/sbirecanon.png", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                "logo": "icones/productslogo/sbirecannon.webp", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                 "seuil": 250,
                 "idcible": 2,
                 "ratio": 4,
@@ -136,7 +136,7 @@ module.exports = {
             },
             {
                 "name": "Bouchon de canon",
-                "logo": "icones/productslogo/sbirecanon.png", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
+                "logo": "icones/productslogo/sbirecannon.webp", //Mettre l'icone du produit, ou un icone marrant style hydre vorace
                 "seuil": 350,
                 "idcible": 2,
                 "ratio": 4,
@@ -338,7 +338,7 @@ module.exports = {
     "allunlocks": [
         {
             "name": "Coronasbirus",
-            "logo": "icones/allunlock/premierunlock.jpg",
+            "logo": "icones/allunlock/coronasbirus.jpg",
             "seuil": 10,
             "idcible": 0,
             "ratio": 3,
@@ -347,7 +347,7 @@ module.exports = {
         },
         {
             "name": "Amélioration des usines de Zaun",
-            "logo": "icones/allunlock/premierunlock.jpg",
+            "logo": "icones/allunlock/usinezaun.jpg",
             "seuil": 25,
             "idcible": 0,
             "ratio": 3,
@@ -356,7 +356,7 @@ module.exports = {
         },
         {
             "name": "Coopération de piltover",
-            "logo": "icones/allunlock/premierunlock.jpg",
+            "logo": "icones/allunlock/piltover.jpg",
             "seuil": 50,
             "idcible": 0,
             "ratio": 3,
@@ -365,7 +365,7 @@ module.exports = {
         },
         {
             "name": "Enfin un meilleur smite",
-            "logo": "icones/allunlock/premierunlock.jpg",
+            "logo": "icones/allunlock/smite.png",
             "seuil": 100,
             "idcible": 0,
             "ratio": 3,
@@ -374,7 +374,7 @@ module.exports = {
         },
         {
             "name": "La lanterne de wriggle ?",
-            "logo": "icones/allunlock/premierunlock.jpg",
+            "logo": "icones/allunlock/wriggle.webp",
             "seuil": 150,
             "idcible": 0,
             "ratio": 3,
@@ -383,43 +383,123 @@ module.exports = {
         },
         {
             "name": "Spatule d'urf",
-            "logo": "icones/allunlock/premierunlock.jpg",
+            "logo": "icones/allunlock/spatule.webp",
             "seuil": 200,
             "idcible": 0,
             "ratio": 3,
             "typeratio": "gain",
             "unlocked": false
-        }
+        },
+        {
+            "name": "Have you seen this man ?",
+            "logo": "icones/allunlock/faker.jpg",
+            "seuil": 200,
+            "idcible": 0,
+            "ratio": 10,
+            "typeratio": "gain",
+            "unlocked": false
+        },
     ],
     "upgrades": [
         {
-            "name": "Massacre des sbires mage",
-            "logo": "icones/sbiremage.jpg",
-            "seuil": 1e3,
+            "name": "Achat d'hydres voraces",
+            "logo": "icones/productslogo/sbiremage.webp",
+            "seuil": 250000,
             "idcible": 1,
             "ratio": 3,
             "typeratio": "gain",
             "unlocked": false
         },
         {
-            "name": "Tueur de cannons",
-            "logo": "icones/sbirecannon.jpg",
-            "seuil": 1e3,
+            "name": "Smite du jungle sur le cannon",
+            "logo": "icones/productslogo/sbirecannon.webp",
+            "seuil": 500000,
             "idcible": 2,
             "ratio": 3,
             "typeratio": "gain",
             "unlocked": false
         },
-        //...
+        {
+            "name": "Extraction de la toxine du gromp",
+            "logo": "icones/productslogo/gromp_render.png",
+            "seuil": 1000000,
+            "idcible": 3,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Régénération du mana augmentée",
+            "logo": "icones/productslogo/Blue_sentinel_Render.png",
+            "seuil": 5000000,
+            "idcible": 4,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Nouveau moyen de transport",
+            "logo": "icones/productslogo/Rift_Herald_Render.png",
+            "seuil": 10000000,
+            "idcible": 5,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Une wave buff ?",
+            "logo": "icones/productslogo/Territorial_Baron_Nashor_Render.png",
+            "seuil": 25000000,
+            "idcible": 6,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
     ],
     "angelupgrades": [
         {
             "name": "Porofessor",
             "logo": "icones/porofessor.png",
-            "seuil": 10,
+            "seuil": 100,
             "idcible": 0,
             "ratio": 3,
             "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Sacrifice de poros",
+            "logo": "icones/ange.jpg",
+            "seuil": 1000,
+            "idcible": 0,
+            "ratio": 2,
+            "typeratio": "ange",
+            "unlocked": false
+        },
+        {
+            "name": "Sacrifice de faker...",
+            "logo": "icones/ange.jpg",
+            "seuil": 10000,
+            "idcible": 0,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Renaissance de faker",
+            "logo": "icones/fakerjesus.jpeg",
+            "seuil": 100000,
+            "idcible": 0,
+            "ratio": 5,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Skt prime 2023",
+            "logo": "icones/ange.jpg",
+            "seuil": 1000000,
+            "idcible": 0,
+            "ratio": 6,
+            "typeratio": "ange",
             "unlocked": false
         },
         //...
@@ -474,8 +554,8 @@ module.exports = {
             "name": "Canyon",
             "logo": "icones/managers/canyon.jpg",
             "seuil": 10000000,
-            "idcible": 2,
-            "ratio": 6,
+            "idcible": 6,
+            "ratio": 0,
             "typeratio": "gain",
             "unlocked": false
         },
