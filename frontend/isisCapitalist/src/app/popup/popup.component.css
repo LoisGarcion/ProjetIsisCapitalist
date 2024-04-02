@@ -2,12 +2,23 @@
   margin: 5px;
   display: flex;
   flex-direction: row;
-  background-color: white;
   align-items: center;
+  width: 40%  ;
   img{
     margin-left: 10px;
   }
-  
+  justify-content: space-evenly;
+
+}
+
+.manager > button{
+  display: flex;
+  flex-direction: column;
+
+}
+
+p{
+  justify-content: bottom;
 }
 
 .dialog{
