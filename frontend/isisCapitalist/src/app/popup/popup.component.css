@@ -1,4 +1,20 @@
 .manager{
+  margin: 5px;
   display: flex;
   flex-direction: row;
+  background-color: white;
+  align-items: center;
+  img{
+    margin-left: 10px;
+  }
+  
 }
+
+.dialog{
+  /* background-color: */
+  background-image: url("../../assets/background_managers.jpg");
+  background-size: 100%;
+}
+
+
+
