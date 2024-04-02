@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 40%;
+  width: 100%;
   img {
     margin-left: 10px;
   }
@@ -16,19 +16,19 @@
 
 }
 
-
-
 .dialog {
   background-image: url("../../assets/background_managers.jpg");
   background-size: 100%;
+  align-items: center;
 }
 
 .unlock {
-  width: 70%;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.7);
   display: flex;
   flex-direction: row;
   align-items: center;
+  text-align: center;
   border-width: 10px;
   border: solid;
   border-color: black;
@@ -36,16 +36,43 @@
 }
 
 .unlock-info {
-  margin-left: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-left-width: 5px;
-  border-right-width: 5px;
   border-left: solid;
-  border-right: solid;
+  width: 50%;
 }
 
 .unlock-info>h3 {
   font-weight: bold;
+}
+
+.investor{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+  margin-top: 10vh;
+}
+
+.actual{
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.reset{
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2vh;
+}
+
+.bigtext{
+  font-size: 2em;
+  font-weight: bold;
+  color: black;
+  padding: 2vh;
 }

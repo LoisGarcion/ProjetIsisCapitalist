@@ -11,7 +11,7 @@
           <div class="manager-info">
             <h3>{{manager.name}}</h3>
             <p>{{getProductNameById(manager.idcible)}}</p>
-            <p>{{manager.seuil}} <img class="coin" src="../../assets/goldcoin.png" alt="coin"> </p> 
+            <p>{{manager.seuil}} <img class="coin" src="../../assets/goldcoin.png" alt="coin"> </p>
           </div>
           <button [disabled]="data.world.money <= manager.seuil" [class.disabled] = "data.world.money <= manager.seuil" (click)="buyManager(manager)">Embaucher !</button>
         </div>
@@ -50,10 +50,12 @@
               <p>Tous</p>
             }
             <p>{{getProductNameById(upgrade.idcible)}}</p>
-            <p>{{upgrade.seuil}}</p>
+
             <p>{{upgrade.typeratio}}</p>
             <p>x{{upgrade.ratio}}</p>
           </div>
+          <p [innerHTML]="upgrade.seuil | bigvalue"></p>
+          <img class="coin" src="../../assets/goldcoin.png" alt="coin">
           <button [disabled]="data.world.money <= upgrade.seuil" [class.disabled] = "data.world.money <= upgrade.seuil" (click)="buyUpgrade(upgrade)">Acheter !</button>
         </div>
       }
@@ -63,10 +65,14 @@
 @if(data.popupPurpose === 'investors'){
   <mat-dialog-content class="dialog">
       <div class="investor">
-        <p>Vous avez actuellement {{data.world.activeangels | bigvalue}} anges</p>
-        <p>Vous gagnez un bonus de {{data.world.angelbonus}}% par anges ! </p>
-        <p>Vous pouvez recommencer la partie pour gagner {{data.world.totalangels | bigvalue}} anges !</p>
-        <button [disabled]="data.world.totalangels === 0" [class.disabled] = "data.world.totalangels === 0" (click)="resetWorld()">Recommencer !</button>
+        <div class="actual">
+          <p>Vous avez actuellement {{data.world.activeangels | bigvalue}} anges</p>
+          <p>Vous gagnez un bonus de {{data.world.angelbonus}}% par anges ! </p>
+        </div>
+        <div class="reset">
+          <p>Vous pouvez recommencer la partie pour gagner {{data.world.totalangels | bigvalue}} anges !</p>
+          <button [disabled]="data.world.totalangels === 0" [class.disabled] = "data.world.totalangels === 0" (click)="resetWorld()">Recommencer !</button>
+        </div>
       </div>
   </mat-dialog-content>
 }
@@ -75,7 +81,7 @@
     @if(data.world.angelupgrades.length === 0){
       <p>Il n'y a plus d'upgrades de disponibles.</p>
     }
-    <div class="nbAnge">Vous avez actuellement {{data.world.activeangels}}</div>
+    <p class="bigtext">Vous avez actuellement {{data.world.activeangels}} anges</p>
     @for(upgrade of data.world.angelupgrades; track upgrade.name){
       @if(!upgrade.unlocked){
         <div class="unlock">
@@ -83,10 +89,10 @@
           <div class="unlock-info">
             <h3>{{upgrade.name}}</h3>
             <p>{{getProductNameById(upgrade.idcible)}}</p>
-            <p>{{upgrade.seuil}}</p>
             <p>{{upgrade.typeratio}}</p>
             <p>x{{upgrade.ratio}}</p>
           </div>
+          <p [innerHTML]="upgrade.seuil | bigvalue"></p>
           <button [disabled]="data.world.activeangels <= upgrade.seuil" [class.disabled] = "data.world.activeangels <= upgrade.seuil" (click)="buyAngelUpgrade(upgrade)">Acheter !</button>
         </div>
       }
