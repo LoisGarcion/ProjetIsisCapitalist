@@ -4,13 +4,15 @@
   flex-direction: row;
   align-items: center;
   width: 40%;
-
   img {
     margin-left: 10px;
   }
-
   justify-content: space-evenly;
-  background-color: rgb(255, 255, 255,0.7x);
+  background-color: rgb(255, 255, 255, 0.7);
+  border-width: 10px;
+  border: solid;
+  border-color: black;
+  background-color: rgba(255, 255, 255, 0.7);
 
 }
 
@@ -21,7 +23,8 @@
   background-size: 100%;
 }
 
-.unlock{
+.unlock {
+  width: 70%;
   background-color: rgba(255, 255, 255, 0.7);
   display: flex;
   flex-direction: row;
@@ -29,17 +32,20 @@
   border-width: 10px;
   border: solid;
   border-color: black;
+  justify-content: space-around;
 }
 
-.unlock-info{
+.unlock-info {
+  margin-left: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
-
+  border-left-width: 5px;
+  border-right-width: 5px;
+  border-left: solid;
+  border-right: solid;
 }
 
-.unlock-info > h3{
+.unlock-info>h3 {
   font-weight: bold;
 }
-

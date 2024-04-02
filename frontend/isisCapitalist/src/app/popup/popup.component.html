@@ -82,9 +82,6 @@
           <img class="round" [src]="GET_SERV+upgrade.logo">
           <div class="unlock-info">
             <h3>{{upgrade.name}}</h3>
-            @if(upgrade.idcible === 0){
-              <p>Tous</p>
-            }
             <p>{{getProductNameById(upgrade.idcible)}}</p>
             <p>{{upgrade.seuil}}</p>
             <p>{{upgrade.typeratio}}</p>
