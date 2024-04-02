@@ -2,7 +2,7 @@
 
   <div class="container">
     <header>
-      <span class="logo"><img [attr.src]="server+world.logo" /> </span>
+      <span class="logo"><img class="image-logo"[attr.src]="server+world.logo" /> </span>
       <div class="header-content">
         <h1>{{world.name}}</h1>
         <div> <span [innerHTML]="world.money | bigvalue"> </span> <img class="coin" src="../assets/goldcoin.png" alt="coin"> </div>
