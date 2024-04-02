@@ -1,6 +1,6 @@
 module.exports = {
     "name": "Zaun Capitalist",
-    "logo": "icones/productslogo/logomonde.png",
+    "logo": "icones/logomonde.png",
     "money": 0,
     "score": 0,
     "totalangels": 0,

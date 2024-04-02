@@ -11,7 +11,8 @@
           <div class="manager-info">
             <h3>{{manager.name}}</h3>
             <p>{{getProductNameById(manager.idcible)}}</p>
-            <p>{{manager.seuil}} <img class="coin" src="../../assets/goldcoin.png" alt="coin"> </p> 
+            <p [innerHTML]="manager.seuil | bigvalue"></p>
+            <img class="coin" src="../../assets/goldcoin.png" alt="coin">
           </div>
           <button [disabled]="data.world.money <= manager.seuil" [class.disabled] = "data.world.money <= manager.seuil" (click)="buyManager(manager)">Embaucher !</button>
         </div>
@@ -27,7 +28,7 @@
         <div class="unlock-info">
           <h3>{{palier.name}}</h3>
           <p>{{getProductNameById(palier.idcible)}}</p>
-          <p>{{palier.seuil}}</p>
+          <p>{{palier.seuil | bigvalue}}</p>
           <p>{{palier.typeratio}}</p>
           <p>x{{palier.ratio}}</p>
         </div>
@@ -50,7 +51,7 @@
               <p>Tous</p>
             }
             <p>{{getProductNameById(upgrade.idcible)}}</p>
-            <p>{{upgrade.seuil}}</p>
+            <p>{{upgrade.seuil | bigvalue}}</p>
             <p>{{upgrade.typeratio}}</p>
             <p>x{{upgrade.ratio}}</p>
           </div>
@@ -86,7 +87,7 @@
               <p>Tous</p>
             }
             <p>{{getProductNameById(upgrade.idcible)}}</p>
-            <p>{{upgrade.seuil}}</p>
+            <p>{{upgrade.seuil | bigvalue}}</p>
             <p>{{upgrade.typeratio}}</p>
             <p>x{{upgrade.ratio}}</p>
           </div>
