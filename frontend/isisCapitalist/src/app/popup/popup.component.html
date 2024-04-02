@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{data.popupPurpose}}</h2>
 @if(data.popupPurpose === 'managers'){
-  <mat-dialog-content>
+  <mat-dialog-content class="dialog">
     @if(data.world.managers.length === 0){
       <p>Vous n'avez pas encore de managers.</p>
     }
@@ -11,7 +11,7 @@
           <div class="manager-info">
             <h3>{{manager.name}}</h3>
             <p>{{getProductNameById(manager.idcible)}}</p>
-            <p>{{manager.seuil}}</p>
+            <p>{{manager.seuil}} <img class="coin" src="../../assets/goldcoin.png" alt="coin"> </p> 
           </div>
           <button [disabled]="data.world.money <= manager.seuil" [class.disabled] = "data.world.money <= manager.seuil" (click)="buyManager(manager)">Embaucher !</button>
         </div>
@@ -20,7 +20,7 @@
   </mat-dialog-content>
 }
 @if(data.popupPurpose === 'unlocks'){
-  <mat-dialog-content>
+  <mat-dialog-content class="dialog">
     @for(palier of this.unlocks; track palier.name){
       <div class="unlock">
         <img class="round" [src]="GET_SERV+palier.logo">
@@ -36,7 +36,7 @@
   </mat-dialog-content>
 }
 @if(data.popupPurpose === 'cashupgrades'){
-  <mat-dialog-content>
+  <mat-dialog-content class="dialog">
     @if(data.world.upgrades.length === 0){
       <p>Il n'y a plus d'upgrades de disponibles.</p>
     }
@@ -61,7 +61,7 @@
   </mat-dialog-content>
 }
 @if(data.popupPurpose === 'investors'){
-  <mat-dialog-content>
+  <mat-dialog-content class="dialog">
       <div class="investor">
         <p>Vous avez actuellement {{data.world.activeangels | bigvalue}} anges</p>
         <p>Vous gagnez un bonus de {{data.world.angelbonus}}% par anges ! </p>
@@ -71,7 +71,7 @@
   </mat-dialog-content>
 }
 @if(data.popupPurpose === 'angelupgrades'){
-  <mat-dialog-content>
+  <mat-dialog-content class="dialog">
     @if(data.world.angelupgrades.length === 0){
       <p>Il n'y a plus d'upgrades de disponibles.</p>
     }

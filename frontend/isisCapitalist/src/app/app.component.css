@@ -96,7 +96,6 @@ header {
 }
 
 .leftmenu {
-    background-image: url("/backend//public/icones/");
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
